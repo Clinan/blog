@@ -106,7 +106,7 @@ org.springframework.web.SpringServletContainerInitializer
 ```
 原理是，文件名称是服务发现的接口全路径名称，内容是接口实现类的全路径名称。SPI会创建这个实现类的实例，并通过接口调用`org.springframework.web.SpringServletContainerInitializer#onStartup`方法。
 
-## 4.总结
+## 4. 总结
 1. 整个过程就不再追溯到tomcat的再往上的源码了，我们已经可以了解到tomcat和spring是怎么样实现了不使用web.xml配置Servlet的了。  
 2. 如果有继续想要了解JDK的SPI实现，可以看下`java.util.ServiceLoader`
 3. 如果看完spring的这个实现还不是很懂，可以看`logback`日志框架的`ch.qos.logback.classic.servlet.LogbackServletContainerInitializer`实现。
