@@ -1,5 +1,5 @@
 module.exports = {
-    title: '克林的博客',
+    title: '克林',
     description: '生活、技术、摄影',
     port: 9000,
     themeConfig: {
