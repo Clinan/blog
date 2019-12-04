@@ -12,7 +12,7 @@ deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main contr
 sudo apt-get update
 sudo apt-get upgrade
 ```
-## 4. dockerce的安装
+## 4. docker-ce的安装
 
 ```bash
 # step 1: 安装必要的一些系统工具

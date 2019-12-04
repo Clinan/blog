@@ -5,3 +5,7 @@
 ## 树莓派
 ### [树莓派初始化教程](./pi-init.md)
 ## linux debian
+### [树莓派初始化教程](./pi-init.md)
+
+## 其他
+### [vuepress部署](./vuepress_deploy.md)

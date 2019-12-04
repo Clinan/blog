@@ -17,3 +17,10 @@ footer: Copyright © 2019-present clinan
 :::warning
 不喜勿扰
 :::
+<a href="https://twitter.com/clinan1" target="_blank">
+<i class="fa fa-twitter fa-5x" style="color:#2a68b9" aria-hidden="true"></i>
+</a>
+
+<a href="https://github.com/clinan" target="_blank">
+<i class="fa fa-github fa-5x" style="color:black" aria-hidden="true"></i>
+</a>
