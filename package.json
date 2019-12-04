@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "'# Hello VuePress!'",
   "scripts": {
-    "dev": "vuepress dev .",
-    "build": "vuepress build . --dest dist"
+    "docs:dev": "vuepress dev .",
+    "docs:build": "vuepress build .",
+    "publish": "deploy.sh"
   },
   "keywords": [],
   "dependencies": {},

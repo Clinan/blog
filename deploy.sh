@@ -4,13 +4,13 @@
 set -e
 
 # 生成静态文件
-npm run build
-
+node c:/Users/leqee/AppData/Roaming/npm/node_modules/vuepress/cli.js build .
+# npm run docs:build
 # 进入生成的文件夹
 cd .vuepress/dist
 
 # 如果是发布到自定义域名
-# echo 'www.example.com' > CNAME
+# echo 'www.clinan.xyz' > CNAME
 
 git init
 git add -A
