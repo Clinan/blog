@@ -40,19 +40,26 @@ module.exports = {
     plugins: [
         ['@vuepress/back-to-top', true],
         ['@vuepress/nprogress'],
-        ['@vuepress/active-header-links']
+        ['@vuepress/active-header-links'],
+        ['container', {
+            type: 'tip',
+            defaultTitle: {
+                '/': '提示'
+            }
+        }],
+        ['container', {
+            type: 'warning',
+            defaultTitle: {
+                '/': '注意'
+            }
+        }],
+        ['container', {
+            type: 'danger',
+            defaultTitle: {
+                '/': '警告'
+            }
+        }],
+
     ]
-    // plugins: [
-    //     ['@vuepress/search', {
-    //         searchMaxSuggestions: 10
-    //     }]
-    // ]
-    // locales
-    // configureWebpack: {
-    //     resolve: {
-    //         alias: {
-    //             '@alias': 'static'
-    //         }
-    //     }
-    // }
+
 };
