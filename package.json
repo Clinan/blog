@@ -8,7 +8,10 @@
     "publish": "deploy.sh"
   },
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "@vssue/api-github-v3": "^1.1.2",
+    "@vssue/vuepress-plugin-vssue": "^1.2.2"
+  },
   "devDependencies": {
     "@vuepress/plugin-active-header-links": "^1.2.0",
     "@vuepress/plugin-back-to-top": "^1.2.0",
