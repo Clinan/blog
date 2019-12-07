@@ -8,4 +8,4 @@
 ### [树莓派初始化教程](./pi-init.md)
 
 ## 其他
-### [vuepress部署](./vuepress_deploy.md)
+### [vuepress部署到github page和自定义域名](./vuepress_deploy.md)

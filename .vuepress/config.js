@@ -26,22 +26,20 @@ module.exports = {
         docsBranch: 'master',
         // 默认为 true，设置为 false 来禁用
         editLinks: true,
-        lastUpdated: 'Last Updated',
+        lastUpdated: '最后更新于',
         // search: false,
         searchMaxSuggestions: 10,
         sidebar: 'auto',
         displayAllHeaders: true,
         nav: [
-            { text: '技术', link: '/modules/technology/' },
-            { text: '生活', link: '/modules/life/' },
-            { text: '摄影', link: '/modules/photography/' }
+            { text: '杂技奇谭', link: '/modules/technology/' },
+            { text: '吃草日常', link: '/modules/life/' },
+            { text: '无后期摄影', link: '/modules/photography/' }
         ],
 
     },
     plugins: [
-        ['@vuepress/back-to-top'],
         ['@vuepress/nprogress'],
-        ['@vuepress/active-header-links'],
         ['@vuepress/search', {
             searchMaxSuggestions: 10
         }],

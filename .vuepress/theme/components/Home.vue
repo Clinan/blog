@@ -49,6 +49,7 @@
       v-if="data.footer"
     >
       {{ data.footer }}
+      </br>
       <a href="https://twitter.com/clinan1" target="_blank">
         <i class="fa fa-twitter fa-2x" style="color:#2a68b9" aria-hidden="true"></i>
       </a>
