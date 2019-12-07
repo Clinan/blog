@@ -1,7 +1,5 @@
-![](https://img.hacpai.com/bing/20190220.jpg?imageView2/1/w/960/h/540/interlace/1/q/100)
-
 # Spring去除web.xml，使用Java配置Servlet的原理，SPI
-
+![](https://img.hacpai.com/bing/20190220.jpg?imageView2/1/w/960/h/540/interlace/1/q/100)
 ## 1. spring使用java配置Servlet代码如下
 ```java
 import org.springframework.web.WebApplicationInitializer;

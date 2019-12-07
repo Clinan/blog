@@ -19,7 +19,7 @@ module.exports = {
     ],
     themeConfig: {
         repo: 'clinan/blog',
-        logo:'/mini_logo.png',
+        logo: '/mini_logo.png',
         // 如果你的文档不在仓库的根部
         // docsDir: 'docs',
         // 可选，默认为 master
@@ -29,7 +29,13 @@ module.exports = {
         lastUpdated: '最后更新于',
         // search: false,
         searchMaxSuggestions: 10,
-        sidebar: 'auto',
+        // sidebar: 'auto',
+
+        sidebar: {
+            '/modules/photography/': require('./sidebar/photography'),
+            '/modules/technology/': require('./sidebar/technology'),
+            '/modules/life/': require('./sidebar/life')
+        },
         displayAllHeaders: true,
         nav: [
             { text: '杂技奇谭', link: '/modules/technology/' },
@@ -43,16 +49,18 @@ module.exports = {
         ['@vuepress/search', {
             searchMaxSuggestions: 10
         }],
+        ['@vuepress/back-to-top', true],
+        ['@vuepress/active-header-links', true],
         ['@vssue/vuepress-plugin-vssue', {
             // 设置 `platform` 而不是 `api`
             platform: 'github',
-      
+
             // 其他的 Vssue 配置
             owner: 'Clinan',
             repo: 'clinan.github.io',
             clientId: 'b0f0e07b684257f4d58b',
             clientSecret: 'f84b781141d1f67def044b7d97b7cc483c426391',
-          }],
+        }],
         ['container', {
             type: 'tip',
             defaultTitle: {

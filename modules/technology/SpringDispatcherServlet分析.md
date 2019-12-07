@@ -1,8 +1,5 @@
-
-
-![](https://img.hacpai.com/bing/20190224.jpg?imageView2/1/w/960/h/540/interlace/1/q/100)
 # SpringDispatcherServlet分析
-
+![](https://img.hacpai.com/bing/20190224.jpg?imageView2/1/w/960/h/540/interlace/1/q/100)
 **DispatcherServlet是spring进入调度的开始，下图展示了从tomcat进入到spring的的调用栈**
 
 ## 1、从tomcat的ApplicationFilterChain的doFilter进入到再web.xml中配置的springServlet
