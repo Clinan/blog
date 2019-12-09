@@ -1,14 +1,21 @@
 # 目录 
 
 <Card 
+    name="MySQL问题总结"
+    image="/others.jpeg" 
+    url="/modules/technology/mysql_learn"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc="where exists, 逗号多表联查，between and的范围, 持续更新。"
+    /> 
+<Card 
     name="Vuepress部署"
     image="/others.jpeg" 
     url="/modules/technology/vuepress_deploy"
     category="TECHNOLOGY"
     author="Clinan"
-    desc="vuepress发布到git page和自定义域名"
+    desc="vuepress发布到git page和自定义域"
     /> 
-
 <Card 
     name="树莓派初始化"
     image="/technology/pi.jpg" 
@@ -23,7 +30,7 @@
     url="/modules/technology/Springboot配置Servlet原理"
     category="TECHNOLOGY"
     author="Clinan"
-    desc=""
+    desc="Springboot配置Servlet原理"
     /> 
 <Card 
     name="SpringDispatcherServlet分析"
@@ -31,6 +38,6 @@
     url="/modules/technology/SpringDispatcherServlet分析"
     category="TECHNOLOGY"
     author="Clinan"
-    desc=""
+    desc="SpringDispatcherServlet分析"
     />
 
