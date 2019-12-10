@@ -30,7 +30,7 @@ module.exports = {
         // search: false,
         searchMaxSuggestions: 10,
         // sidebar: 'auto',
-
+        smoothScroll:true,
         sidebar: {
             '/modules/photography/': require('./sidebar/photography'),
             '/modules/technology/': require('./sidebar/technology'),
@@ -76,7 +76,7 @@ module.exports = {
         ['container', {
             type: 'danger',
             defaultTitle: {
-                '/': '警告'
+                '/': ''
             }
         }],
 

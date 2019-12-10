@@ -44,7 +44,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
 
 $bg: #eedfcc;
 $text: #777;
@@ -64,6 +63,9 @@ $shadow: rgba(0, 0, 0, 0.2);
   &::after {
     box-sizing: border-box;
   }
+}
+a {
+  text-decoration: none
 }
 
 .blog-card {
@@ -174,6 +176,6 @@ $shadow: rgba(0, 0, 0, 0.2);
   }
 }
 a :hover {
-  text-decoration-color: #fff
+  text-decoration:none;
 }
 </style>
