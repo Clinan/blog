@@ -1,4 +1,4 @@
-# mySQL中学到的知识
+# MySQL中学到的知识
 ## exists的使用
 
 :::tip
@@ -57,7 +57,7 @@ where exists(select 1 from bb eb where eb.b_index != b.b_index and eb.a_id = a.i
 
 ![](/technology/mysql_learn_6.png)
 
-:::TIP
+:::tip
 where exist中只要有返回值，无论是什么内容，返回就会判断这条数据通过where条件，从而保留这条数据。exists返回的结果集是空的话，则不能通过where判断，然后被where过滤掉。
 :::
 
