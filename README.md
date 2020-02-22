@@ -15,7 +15,7 @@ features:
 - title: 无后期摄影
   link: /modules/photography/
   details: 不会摄影，主要的还是用手机拍摄的Daily，使用图片记录一些平常的开心的事情，希望把快乐分享在这个个人空间。
-footer: Copyright ©2019-present clinan | 浙ICP备18027774号-2
+footer: Copyright ©2019-present clinan
 ---
 :::warning
 在哪都是老老实实，本本分分的祖安人呀-_-

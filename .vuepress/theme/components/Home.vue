@@ -48,7 +48,7 @@
       class="footer"
       v-if="data.footer"
     >
-      {{ data.footer }}
+      {{ data.footer }} <a href="http://www.beian.gov.cn/portal/registerSystemInfo"  class="footer" target="_blank">浙ICP备18027774号</a>
       </br>
       <a href="https://twitter.com/clinan1" target="_blank">
         <i class="fa fa-twitter fa-2x" style="color:#2a68b9" aria-hidden="true"></i>
