@@ -1,8 +1,16 @@
 # 目录 
 
 <Card 
+    name="MySQL事务隔离级别"
+    image="/mysql_logo.png" 
+    url="/modules/technology/mysql_isolation"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc="从官方文档看MYSQL事务隔离级别"
+    /> 
+<Card 
     name="MySQL问题总结"
-    image="/others.jpeg" 
+    image="/mysql_logo.png" 
     url="/modules/technology/mysql_learn"
     category="TECHNOLOGY"
     author="Clinan"
