@@ -27,7 +27,8 @@ module.exports = [
         collapsable: true,
         children: [
             '/modules/technology/vuepress_deploy',
-            '/modules/technology/mysql_learn'
+            '/modules/technology/mysql_learn',
+            '/modules/technology/mysql_isolation'
         ]
     },
 ]
