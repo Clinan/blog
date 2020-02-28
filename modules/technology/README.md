@@ -1,6 +1,14 @@
 # 目录 
 
 <Card 
+    name="Docker初始化"
+    image="/others.jpeg" 
+    url="/modules/technology/docker_init"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc="本教程只适用于ARM64架构的机器，其他的直接点击官网"
+    /> 
+<Card 
     name="MySQL事务隔离级别"
     image="/mysql_logo.png" 
     url="/modules/technology/mysql_isolation"

@@ -28,7 +28,8 @@ module.exports = [
         children: [
             '/modules/technology/vuepress_deploy',
             '/modules/technology/mysql_learn',
-            '/modules/technology/mysql_isolation'
+            '/modules/technology/mysql_isolation',
+            '/modules/technology/docker_init'
         ]
     },
 ]
