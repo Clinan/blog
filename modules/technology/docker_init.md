@@ -1,6 +1,6 @@
 # Docker和lazydocker的安装
 
-**写在开始，本教程只适用于ARM64架构的机器，其他的直接点击官网**
+**写在开始，本教程只适用于AMD64架构的机器，其他的直接点击官网**
 
 ## 准备工作
 配置系统的软件镜像，可以下载更快
@@ -30,13 +30,13 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 # ubuntu
 sudo add-apt-repository \
-   "deb [arch=arm64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \
+   "deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
 
 # debian
 sudo add-apt-repository \
-   "deb [arch=arm64] https://mirrors.aliyun.com/docker-ce/linux/debian \
+   "deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/debian \
    $(lsb_release -cs) \
    stable"
 

@@ -6,7 +6,7 @@
     url="/modules/technology/docker_init"
     category="TECHNOLOGY"
     author="Clinan"
-    desc="本教程只适用于ARM64架构的机器，其他的直接点击官网"
+    desc="本教程只适用于AMD64架构的机器，其他的直接点击官网"
     /> 
 <Card 
     name="MySQL事务隔离级别"
