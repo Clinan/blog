@@ -2,8 +2,6 @@
 
 ## Enable相关注解
 1. `@SpringBootApplication`包含了`@SpringBootConfiguration(等同于@Configuration),@EnableAutoConfiguration,@ComponentScan`
-2. 
-3. 
 
 ## 主要的注解
 1. `ConditionalOnClass`判断在类路径下是否存在该类，如果存在则执行方法
