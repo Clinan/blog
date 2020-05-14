@@ -6,6 +6,8 @@ module.exports = [
         children: [
             '/modules/technology/Springboot配置Servlet原理',
             '/modules/technology/SpringDispatcherServlet分析',
+            '/modules/technology/springboot-autoconfigure',
+            '/modules/technology/spring-HandlerMethodArgumentResolver'
         ]
     },
     {

@@ -1,5 +1,20 @@
 # 目录 
-
+<Card 
+    name="Springboot Token登录校验"
+    image="/technology/spring-boot-java.jpg" 
+    url="/modules/technology/spring-HandlerMethodArgumentResolver"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc="Token登录校验中HandlerMethodArgumentResolver的使用"
+    /> 
+<Card 
+    name="Springboot自动化配置的注解"
+    image="/technology/spring-boot-java.jpg" 
+    url="/modules/technology/springboot-autoconfigure"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc="主要是配置类的注解"
+    /> 
 <Card 
     name="Docker初始化"
     image="/others.jpeg" 
