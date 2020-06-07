@@ -1,17 +1,17 @@
-#开启CSS Module样式隔离后需要注意的坑
+# 开启CSS Module样式隔离后需要注意的坑
 开启CSS Module样式隔离后，将不会直接在入口js中import样式文件，而是在使用的地方按需引入，即使是全局样式也是如此。
 
 ## 理论基础
 使用CSS Module时有很多需要注意的地方，你需要一些Webpack的知识才能保证在使用时不出错，Webpack编译时每个编译单元都是一个Module，并且每一个Module分别处理。
 
-###Webpack
+### Webpack
 Webpack是一个模块编译器，编译的单位就是一个个Module，并用一个URI标识它，相同的URI只会在第一次遇到时编译。同一个文件，如果URI不同，就会作为两个不同的Module编译
 
 Webpack编译的入口由用户指定，从入口Module开始，根据`import`和`require`语句遍历所有Module，其编译的顺序类似于遍历时的深度优先算法，每次遇到`import`，总是先将`import`指向的URI对应的Module先编译完，再编译下一个`import`。
 
 因此，对于整个项目中的多个JS与Vue文件，如果这些文件中都有样式的Module或对样式Module的引用，去除对相同Module的重复引用后，最终样式在页面上渲染的顺序就是Webpack编译Module的顺序。
 
-###vue-loader
+### vue-loader
 Webpack在编译Vue文件时，由vue-loader做第一层处理，vue-loader将Vue文件中的每一个标签作为一个Module编译，顺序为template/script/style。
 
 在Vue文件中导入样式文件有两种方式，第一种是在`<style>`标签中通过src导入，第二种是在`<script>`标签中通过import导入。本地样式则可直接写在`<style>`标签中。
@@ -45,7 +45,7 @@ Webpack在编译Vue文件时，由vue-loader做第一层处理，vue-loader将Vu
 - `<script>`内部导入的多个样式的顺序即为import的顺序
 - 多个`<style>`间的样式的顺序即为`<style>`在Vue文件中的顺序
 
-###CSS
+### CSS
 最后介绍CSS，当一个HTML元素有多个权重相同的样式同时生效时，后定义的样式优先级更高，因此`<style>`标签在页面中渲染的顺序也会影响样式的生效与否
 
 在Vue文件中覆盖全局样式时，强烈建议用自定义类名+全局样式的选择器，使用与全局样式相同的选择器可以确保你自定义的样式仅在特定的场景下生效
@@ -57,7 +57,7 @@ Webpack在编译Vue文件时，由vue-loader做第一层处理，vue-loader将Vu
 
 后面的三次覆盖的样式权重是完全相同的，均为0020，但由于操作员中心最先渲染，子系统全局样式第二渲染，Vue页面自定义样式最后渲染，所以最后生效的总是Vue页面上自定义的样式
 
-##使用规则
+## 使用规则
 综上所述，在Vue中使用CSS Module技术时，需要避免同一份样式被多次编译，还需要关注编译的顺序，确保样式覆盖的顺序不出错
 
 引用样式文件时，应遵循vue-loader小节中的两种引用方式。
@@ -70,10 +70,11 @@ Webpack在编译Vue文件时，由vue-loader做第一层处理，vue-loader将Vu
 
 同时，为了本地样式能正确地覆盖全局样式，应遵循vue-loader部分的说明，按合适的顺序编写样式相关的代码。
 
-##举个例子
+## 举个例子
 有main.js/A.vue/B.vue/1.scss/2.scss/3.scss/4.scss/5.scss/6.scss
+
 main.js是编译入口，内容如下
-```ecmascript 6
+```javascript
 import '1.scss?module';
 // noinspection ES6UnusedImports,NpmUsedModulesInstalled
 import A from 'A.vue';
@@ -150,10 +151,10 @@ export default {
 
 结合使用上述两种方法，基本可以规避重复渲染导致的问题，确保每一段CSS样式只在页面上渲染一次。
 
-##一种典型的使用方法
+## 一种典型的使用方法
 下述方法仅供参考
 
 全局样式文件在需要的Vue文件中使用`<style>`标签引入，并且必须是第一个标签。可能会产生index问题的局部样式文件通过`@import`导入全局样式文件的末尾，由于包含`url()`导致无法导入且不会产生优先级问题的局部样式文件，通过纯JS方式用`import`导入
 
-##总结
+## 总结
 CSS Module的使用方式没有严格标准，应当根据实际需要进行调整，但始终围绕两个目标：无重复渲染、渲染顺序正确！
