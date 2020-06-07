@@ -1,5 +1,13 @@
 # 目录 
 <Card 
+    name="CSS Module踩坑"
+    image="/technology/css-modules-logo.png" 
+    url="/modules/technology/CSS_Module踩坑"
+    category="TECHNOLOGY"
+    author="ztyzbb"
+    desc="开启CSS Module样式隔离后需要注意的坑"
+    /> 
+<Card 
     name="Springboot Token登录校验"
     image="/technology/spring-boot-java.jpg" 
     url="/modules/technology/spring-HandlerMethodArgumentResolver"
