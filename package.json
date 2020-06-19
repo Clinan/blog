@@ -17,6 +17,7 @@
     "@vuepress/plugin-back-to-top": "^1.2.0",
     "@vuepress/plugin-nprogress": "^1.2.0",
     "node-sass": "^4.13.0",
-    "sass-loader": "^8.0.0"
+    "sass-loader": "^8.0.0",
+    "vuepress": "^1.5.2"
   }
 }
