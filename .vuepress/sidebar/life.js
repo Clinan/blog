@@ -1,10 +1,18 @@
 module.exports = [ 
+    '/modules/life/',
     {
         title: '减肥', // 侧边栏名称 
-        collapsable: true, // 可折叠 
+        collapsable: false, // 可折叠 
         children: [
             '/modules/life/daily_main',
             '/modules/life/loss_weight', // 你的md文件地址 
+        ]
+    },
+    {
+        title: '锻炼', // 侧边栏名称 
+        collapsable: true, // 可折叠 
+        children: [
+            '/modules/life/train',
         ]
     },
     {

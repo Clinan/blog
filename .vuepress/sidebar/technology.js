@@ -31,7 +31,8 @@ module.exports = [
             '/modules/technology/vuepress_deploy',
             '/modules/technology/mysql_learn',
             '/modules/technology/mysql_isolation',
-            '/modules/technology/docker_init'
+            '/modules/technology/docker_init',
+            '/modules/technology/CSS_Module踩坑'
         ]
     },
 ]
