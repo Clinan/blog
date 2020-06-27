@@ -1,6 +1,7 @@
 module.exports = [
     '/modules/photography/',
     '/modules/photography/1207',
+    '/modules/photography/shaoxing',
     // {
     //     title: 'JavaScript', // 侧边栏名称 
     //     collapsable: true, // 可折叠 

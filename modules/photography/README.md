@@ -1,3 +1,4 @@
-# 无修图摄影
-## 我的图毫无PS痕迹
-~~相机太尼玛贵了，镜头像是个无底洞，没有家底，明年条件好点，可以开始~~
+# 照片
+
+- [萧山](/modules/photography/1207.html)
+- [绍兴](/modules/photography/shaoxing.html)
