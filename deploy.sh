@@ -21,3 +21,4 @@ git push -f https://github.com/Clinan/clinan.github.io.git master
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
 # git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
+

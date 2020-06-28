@@ -22,3 +22,4 @@ env:
     global:
         - GE_REF: gitee.com/clinan/clinan.github.io.git
         - GH_REF: github.com/clinan/clinan.github.io.git
+        
