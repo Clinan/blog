@@ -2,9 +2,9 @@ const qiniu = require("qiniu");
 const proc = require("process");
 const path = require("path");
 const fs = require("fs");
-var accessKey = "W3ZuojDuij3i8gkJ5HJEkjtBDG_X1gfgRUgoWI3v";
-var secretKey = "hG5ytYoB41S4CKaITnRm-WJVSx--G9roov4a0WQT";
-var bucket = "clinan";
+var bucket = proc.env.QINIU_BUCKET;
+var accessKey = proc.env.QINIU_ACCESS_KEY;
+var secretKey = proc.env.QINIU_SECRET_KEY;
 var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
 var options = {
   scope: bucket,
