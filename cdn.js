@@ -2,9 +2,9 @@ const qiniu = require("qiniu");
 const proc = require("process");
 const path = require("path");
 const fs = require("fs");
-var bucket = proc.env.QINIU_BUCKET;
-var accessKey = proc.env.QINIU_ACCESS_KEY;
-var secretKey = proc.env.QINIU_SECRET_KEY;
+var accessKey = "W3ZuojDuij3i8gkJ5HJEkjtBDG_X1gfgRUgoWI3v";
+var secretKey = "hG5ytYoB41S4CKaITnRm-WJVSx--G9roov4a0WQT";
+var bucket = "clinan";
 var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
 var options = {
   scope: bucket,
@@ -49,11 +49,10 @@ function readFileList(dir, filesList = [], existFiles = []) {
     var fullPath = path.join(dir, item);
     const stat = fs.statSync(fullPath);
     if (stat.isDirectory() && !excludeSubDir.includes(item)) {
-      readFileList(path.join(dir, item), filesList); //递归读取文件
+      readFileList(path.join(dir, item), filesList, existFiles); //递归读取文件
     } else if (
-      !excludeSubDir.includes(item) &&
       imageExtName.includes(path.extname(item)) &&
-      !existFiles.includes(path.extname(item))
+      !existFiles.includes(item)
     ) {
       upload(fullPath);
       filesList.push(fullPath);
@@ -68,8 +67,8 @@ bucketManager.listPrefix(bucket, null, function (respErr, respBody, respInfo) {
     throw respErr;
   }
   if (respInfo.statusCode == 200) {
-    // console.log(respBody);
     var existFiles = respBody.items.map((v) => v.key);
+    // console.log(existFiles);
     var filesList = [];
     console.log("start upload");
     readFileList(__dirname, filesList, existFiles);
