@@ -5,6 +5,7 @@ cache: npm
 install:
     - npm install
 script:
+    - node ./cdn.js
     - npm run docs:build
 after_success:
     - cd ./.vuepress/dist
