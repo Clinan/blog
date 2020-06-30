@@ -10,15 +10,15 @@
 
 ### 数据展示
 #### aa表
-![](/technology/mysql_learn_1.png)
+![](http://cdn.clinan.xyz/mysql_learn_1.png)
 ### bb表
-![](/technology/mysql_learn_2.png)
+![](http://cdn.clinan.xyz/mysql_learn_2.png)
 ```sql
 select a.id, b.b_index
 from aa a
          left join bb b on b.a_id = a.id;
 ```
-![](/technology/mysql_learn_3.png)
+![](http://cdn.clinan.xyz/mysql_learn_3.png)
 
 ```sql
 select count(a.id) as coun, a.id, b.b_index
@@ -26,7 +26,7 @@ from aa a
          left join bb b on b.a_id = a.id
 group by a.id;
 ```
-![](/technology/mysql_learn_4.png)
+![](http://cdn.clinan.xyz/mysql_learn_4.png)
 
 ### 法1
 ```sql
@@ -43,7 +43,7 @@ where a.id in (
     where tmp.cou > 1
 );
 ```
-![](/technology/mysql_learn_5.png)
+![](http://cdn.clinan.xyz/mysql_learn_5.png)
 
 
 
@@ -55,7 +55,7 @@ from aa a
 where exists(select 1 from bb eb where eb.b_index != b.b_index and eb.a_id = a.id);
 ```
 
-![](/technology/mysql_learn_6.png)
+![](http://cdn.clinan.xyz/mysql_learn_6.png)
 
 :::tip
 where exist中只要有返回值，无论是什么内容，返回就会判断这条数据通过where条件，从而保留这条数据。exists返回的结果集是空的话，则不能通过where判断，然后被where过滤掉。
@@ -74,7 +74,7 @@ from (
 where a.value between 1 and 3
 ```
 答案是显而易见的
-![](/technology/mysql_learn_7.png)
+![](http://cdn.clinan.xyz/mysql_learn_7.png)
 
 ## 多表联查 逗号联查
 :::tip
@@ -86,7 +86,7 @@ select a.id, b.id as bid
 from aa a,
      bb b
 ```
-![](/technology/mysql_learn_8.png)
+![](http://cdn.clinan.xyz/mysql_learn_8.png)
 
 - 查询结果是一个aa,bb的笛卡尔积，即aa x bb 
 - aa表的每一条数据都去左连接bb表的所有数据。

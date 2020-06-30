@@ -8,7 +8,7 @@
 :::
 
 ## 1.在github创建仓库
-![](/technology/vuepress_deploy_1.png)
+![](http://cdn.clinan.xyz/vuepress_deploy_1.png)
 
 ## 2.部署脚本
 
@@ -43,8 +43,8 @@ git push -f https://github.com/clinan/clinan.github.io.git master
 ```
 
 ## 3.到github项目界面上查看
-![](/technology/vuepress_deploy_2.png)
-![](/technology/vuepress_deploy_3.png)
+![](http://cdn.clinan.xyz/vuepress_deploy_2.png)
+![](http://cdn.clinan.xyz/vuepress_deploy_3.png)
 
 ## 4.部署到github page完成
 访问`https://<USERNAME>.github.io`查看是否发布成功
@@ -53,6 +53,6 @@ git push -f https://github.com/clinan/clinan.github.io.git master
 - 将deploy.sh的中CNAME的那行取消注释，并换成自己的域名
 - 在域名提供商处添加cname的解析。然后等待一段时间（半天，官方说是24h）。
 - 阿里云的配置域名解析如下图，自定义域名是www.clinan.xyz
-![阿里云配置github page CNAME解析](/technology/vuepress_deploy_4.png)
+![阿里云配置github page CNAME解析](http://cdn.clinan.xyz/vuepress_deploy_4.png)
 - 等待是很烦的，如果想进一步，在linux（windows的WSL也行）下，输入`dig 你的自定义域名`，查看DNS解析
-![查看DNS解析](/technology/vuepress_deploy_5.png)
+![查看DNS解析](http://cdn.clinan.xyz/vuepress_deploy_5.png)
