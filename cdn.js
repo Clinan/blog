@@ -33,7 +33,7 @@ function upload(fullPath) {
       }
 
       if (respInfo.statusCode == 200) {
-        console.log(respBody);
+        console.log(respBody.key);
       } else {
         console.log(respInfo.statusCode);
         console.log(respBody);
@@ -71,8 +71,9 @@ bucketManager.listPrefix(bucket, null, function (respErr, respBody, respInfo) {
     // console.log(respBody);
     var existFiles = respBody.items.map((v) => v.key);
     var filesList = [];
+    console.log("start upload");
     readFileList(__dirname, filesList, existFiles);
-    console.log(filesList.map((v) => path.basename(v)));
+    // console.log(filesList.map((v) => path.basename(v)));
   } else {
     console.log(respInfo.statusCode);
     console.log(respBody);
