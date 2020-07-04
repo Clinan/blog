@@ -12,6 +12,10 @@ after_success:
     - git init
     - git config --global user.name "${U_NAME}"
     - git config --global user.email "${U_EMAIL}"
+    - cat<<EOF>>.gitignore life
+    - photography
+    - technology
+    - EOF
     - git add -A
     - git commit -m 'deploy'
     - git push --force "https://${GE_TOKEN}@${GE_REF}" master:${P_BRANCH}
