@@ -12,7 +12,9 @@ after_success:
     - git init
     - git config --global user.name "${U_NAME}"
     - git config --global user.email "${U_EMAIL}"
-    - cat<<EOF>>.gitignore life
+    - touch .gitignore
+    - cat>>.gitignore<<EOF
+    - life
     - photography
     - technology
     - EOF
