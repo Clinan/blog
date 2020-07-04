@@ -10,7 +10,6 @@ script:
 after_success:
     - cp dist.gitignore ./.vuepress/dist/.gitignore
     - cd ./.vuepress/dist
-    - cat .gitignore
     - git init
     - git config --global user.name "${U_NAME}"
     - git config --global user.email "${U_EMAIL}"
