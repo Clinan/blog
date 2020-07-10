@@ -14,8 +14,8 @@ module.exports = {
         //         rel: 'stylesheet',
         //         href: `https://fonts.cat.net/css?family=Roboto:100,300,400,500,700,900|Material+Icons`
         //     }],
-        // ['link', {rel: 'stylesheet', href: `https://use.fontawesome.com/releases/v5.1.0/css/all.css`}],
-        ['script', { src: 'https://use.fontawesome.com/623269ea04.js' }]
+        ['link', {rel: 'stylesheet', href: `http://cdn.clinan.xyz/fontawesome.css`}],
+        // ['script', { src: 'https://use.fontawesome.com/623269ea04.js' }]
     ],
     themeConfig: {
         repo: 'clinan/blog',
