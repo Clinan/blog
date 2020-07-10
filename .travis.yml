@@ -1,13 +1,14 @@
 language: node_js
 node_js:
     - 10
-cache: npm
+cache: yarn
 install:
-    - npm install
+    - yarn install
 script:
     - node ./cdn.js
-    - npm run docs:build
+    - yarn run docs:build
 after_success:
+    - cp dist.gitignore ./.vuepress/dist/.gitignore
     - cd ./.vuepress/dist
     - git init
     - git config --global user.name "${U_NAME}"
