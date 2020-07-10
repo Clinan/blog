@@ -8,7 +8,7 @@ actionLink: /modules/technology/
 features:
 - title: 现代文学
   link: /modules/literature/
-  details: 当代dai诗人花花的诗集，文学作品集，杂笔随思，文学作品注重写实，在用朴素的辞藻编排平凡生活，展现立体的生活。本站牌面。
+  details: 当代dai诗人花花的诗集，文学作品集，杂笔随思，其作品注重写实，善于用朴素的辞藻编排平凡生活，展现立体的生活。本站牌面。
 - title: 杂技奇谭
   link: /modules/technology/
   details: 平时的一些技术积累、突破和圈的重点，java、spring、mysql、docker、LINUX、树莓派等技术。
