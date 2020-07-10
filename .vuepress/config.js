@@ -19,7 +19,7 @@ module.exports = {
     ],
     themeConfig: {
         repo: 'clinan/blog',
-        logo: '/mini_logo.png',
+        logo: 'https://cdn.clinan.xyz/mini_logo.png',
         // 如果你的文档不在仓库的根部
         // docsDir: 'docs',
         // 可选，默认为 master
