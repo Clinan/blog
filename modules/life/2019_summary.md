@@ -45,7 +45,7 @@
 另外最近年会练跳舞，真的不敢乱跳，动作幅度特别小，还有身体各种不协调。  
 **向我的partner道歉**
 
-![低头](http://cdn.clinan.xyz/apologize.jpg)
+![低头](https://cdn.clinan.xyz/apologize.jpg)
 
 ---
 书也看了一点，特别是上周杭州连着下了好几天的雨，那种充满这因潮湿而引起的腐烂气味，
@@ -56,7 +56,7 @@
 啊哈哈哈，还没写，就想笑的，还是杭漂葫芦娃，一群憨批。今天欺骗灰狗说他是七娃，是能力最强的一个，他欣然接受了，啊哈哈哈
 那剩下的我们不就是123456娃了吗？他就是个弟弟！！！
 <div style="display:flex">
-![低头](http://cdn.clinan.xyz/didi.jpg)   <img src="/life/huigou.jpg" style="width:300px;height:190px"></img>
+![低头](https://cdn.clinan.xyz/didi.jpg)   <img src="/life/huigou.jpg" style="width:300px;height:190px"></img>
 </div>
 ## 学习
 在毕业的最后一个学期，还在重修着必修课，还有找工作、实习、毕设这些小魔鬼的环绕。

@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: http://cdn.clinan.xyz/hero.png
+heroImage: https://cdn.clinan.xyz/hero.png
 heroText: Ha sai ki~~~
 tagline: 塞北的雪-欲蠢-花里胡哨
 actionText: Ya li tuo →
