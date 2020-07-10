@@ -34,10 +34,12 @@ module.exports = {
         sidebar: {
             '/modules/photography/': require('./sidebar/photography'),
             '/modules/technology/': require('./sidebar/technology'),
-            '/modules/life/': require('./sidebar/life')
+            '/modules/life/': require('./sidebar/life'),
+            '/modules/literature/': require('./sidebar/literature')
         },
         displayAllHeaders: true,
         nav: [
+            { text: '现代文学', link: '/modules/literature/' },
             { text: '杂技奇谭', link: '/modules/technology/' },
             { text: '吃草日常', link: '/modules/life/' },
             { text: '无后期摄影', link: '/modules/photography/' }
