@@ -70,7 +70,7 @@ bucketManager.listPrefix(bucket, null, function (respErr, respBody, respInfo) {
     var existFiles = respBody.items.map((v) => v.key);
     // console.log(existFiles);
     var filesList = [];
-    console.log("start upload");
+    console.log("开始上传，start upload");
     readFileList(__dirname, filesList, existFiles);
     // console.log(filesList.map((v) => path.basename(v)));
   } else {
