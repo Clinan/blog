@@ -14,11 +14,12 @@ var $ = cheerio.load(html);
   var pre = $(this).children('pre').text()
   output.push({"time":time,"title":title,"pre":pre});
 });
-var content ='# 木莺\n<font size = 3>作者[赵坤](http://xn--tfs117j.cn/)</font>\n'
+var content ='# 木莺\n<font size = 3>作者[赵坤](http://xn--tfs117j.cn/)</font>  \n'
++'<font size = 3>如需转载请联系作者<br>未经授权，不许转载</font>\n'
 output.forEach(elem=>{
   content+='## '+elem.title+'\n';
   content+='<font size = 2>'+elem.time+'</font>\n';
-  content+='<pre>'+elem.pre+'</pre>\n';
+  content+='<code>'+elem.pre+'</code>\n';
 });
 fs.writeFile(path.join('./modules/literature/muying.md'), content, 'utf8', function (error) {
   if (error) {
