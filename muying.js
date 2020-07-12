@@ -1,4 +1,3 @@
-const http = require('https');
 const fs = require('fs');
 const path = require('path');
 
@@ -19,7 +18,7 @@ var content ='# 木莺\n<font size = 3>作者[赵坤](http://xn--tfs117j.cn/)</f
 output.forEach(elem=>{
   content+='## '+elem.title+'\n';
   content+='<font size = 2>'+elem.time+'</font>\n';
-  content+='<code>'+elem.pre+'</code>\n';
+  content+='```\n'+elem.pre+'\n```\n';
 });
 fs.writeFile(path.join('./modules/literature/muying.md'), content, 'utf8', function (error) {
   if (error) {
