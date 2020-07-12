@@ -6,6 +6,7 @@
 就会发现这些诗写的是如此精辟，是如此的引人沉醉。
 :::
 - [花花的诗](/modules/literature/poem.md)
+- [木莺](/modules/literature/muying.md)
 
 # 歌
 

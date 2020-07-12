@@ -1,5 +1,5 @@
 module.exports = [ 
-  '/modules/literature/poem',
+  '/modules/literature/',
   // {
   //     title: '现代诗词',
   //     collapsable: true, 
