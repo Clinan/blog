@@ -28,6 +28,7 @@ module.exports = [
         children: [
             '/modules/life/2020伊始',
             '/modules/life/fooddiet-meals', 
+            '/modules/life/diary_note', 
         ]
     },
 ]
