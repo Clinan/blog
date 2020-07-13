@@ -10,6 +10,8 @@
 ### [花花的诗](/modules/literature/poem.md)
 ### [木莺](/modules/literature/muying.md)
 
+## 蠢学
+### [定义和释义](/modules/literature/chun-define.md)
 
 # 随笔
 
