@@ -8,7 +8,7 @@ module.exports = [
       {
         title: '花花的诗',
         collapsable: true,
-        sidebarDepth: 0,
+        sidebarDepth: 1,
         children: [
           '/modules/literature/poem',
         ]
@@ -16,7 +16,7 @@ module.exports = [
       {
         title: '木莺',
         collapsable: true,
-        sidebarDepth: 0,
+        sidebarDepth: 1,
         children: [
           '/modules/literature/muying',
         ]
@@ -26,6 +26,7 @@ module.exports = [
   {
     title: '蠢学',
     collapsable: true,
+    sidebarDepth: 0,
     children: [
       '/modules/literature/chun-define',
     ]
