@@ -56,7 +56,7 @@
 啊哈哈哈，还没写，就想笑的，还是杭漂葫芦娃，一群憨批。今天欺骗灰狗说他是七娃，是能力最强的一个，他欣然接受了，啊哈哈哈
 那剩下的我们不就是123456娃了吗？他就是个弟弟！！！
 <div style="display:flex">
-![低头](https://cdn.clinan.xyz/didi.jpg)   <img src="/life/huigou.jpg" style="width:300px;height:190px"></img>
+![低头](https://cdn.clinan.xyz/didi.jpg)   <img src="https://cdn.clinan.xyz/huigou.jpg" style="width:300px;height:190px"></img>
 </div>
 ## 学习
 在毕业的最后一个学期，还在重修着必修课，还有找工作、实习、毕设这些小魔鬼的环绕。

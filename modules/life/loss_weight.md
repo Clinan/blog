@@ -2,12 +2,12 @@
 
 
 ## 这里记录体重数据曲线
-这是在我买了新的体脂秤之后的数据统计图
-![周曲线](/life/weight_tending.jpg)
+这是在我买了新的体脂秤之后的数据统计图  
+![周曲线](https://cdn.clinan.xyz/weight_tending.jpg)
 
 ---
 
-![月曲线](/life/weight_tending2.jpg)
+![月曲线](https://cdn.clinan.xyz/weight_tending2.jpg)
 
 *2020.05.14上传*
 
@@ -52,7 +52,7 @@
 - 目前对于将来比较困惑的就是去健身房的话，我应该怎么去合理的安排我的晚餐。
 
 附上一张图吧。出自灰狗之手
-![compare](/life/change.jpg)
+![compare](https://cdn.clinan.xyz/change.jpg)
 
 ---
 
@@ -71,7 +71,7 @@
 - 练核心、练胸肌、下肢塑形
 - 多吃鸡蛋和蛋白粉，保持高蛋白
 - 盼望自己能够在一个月之后，达到15%的小目标
-![5-14body](/life/5-14body.jpg)
+![5-14body](https://cdn.clinan.xyz/5-14body.jpg)
 
 ---
 ### 2020.05.14 健身初体验
