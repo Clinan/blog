@@ -151,3 +151,7 @@ public ConfigurableApplicationContext run(String... args) {
 - 请注意，此对象并非设计为线程安全的，并且不使用同步。此类通常用于在概念验证工作和开发过程中验证性能，而不是作为生产应用程序的一部分。
 - 从Spring Framework 5.2开始，以纳秒为单位跟踪和报告运行时间。
 
+### prepareEnvironment
+- 创建和配置Environment
+- 
+
