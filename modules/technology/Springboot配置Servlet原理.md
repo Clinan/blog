@@ -1,4 +1,6 @@
-# Spring去除web.xml，使用Java配置Servlet的原理，SPI
+# Servlet SPI
+Spring去除web.xml，使用Java配置Servlet的原理，SPI
+
 ![](https://img.hacpai.com/bing/20190220.jpg?imageView2/1/w/960/h/540/interlace/1/q/100)
 ## 1. spring使用java配置Servlet代码如下
 ```java
@@ -120,6 +122,9 @@ public class WarApplication extends SpringBootServletInitializer {
 	}
 }
 ```
+:::warn
+还有springboot war包的插件
+:::
 
 ## 5. 总结
 1. 整个过程就不再追溯到tomcat的再往上的源码了，我们已经可以了解到tomcat和spring是怎么样实现了不使用web.xml配置Servlet的了。  

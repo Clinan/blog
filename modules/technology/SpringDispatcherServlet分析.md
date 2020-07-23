@@ -2,12 +2,14 @@
 ![](https://img.hacpai.com/bing/20190224.jpg?imageView2/1/w/960/h/540/interlace/1/q/100)
 **DispatcherServlet是spring进入调度的开始，下图展示了从tomcat进入到spring的的调用栈**
 
-## 1、从tomcat的ApplicationFilterChain的doFilter进入到再web.xml中配置的springServlet
+## 1、配置springServlet
+从tomcat的ApplicationFilterChain的doFilter进入到再web.xml中配置的springServlet
 
 ![](https://img-blog.csdnimg.cn/20190716092236494.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NDQ2NoZWFu,size_16,color_FFFFFF,t_70)
 
 ---
-## 2、在doDispatcher方法中，调度到具体的Controller中，并返回一个ModelAndView的对象
+## 2、doDispatcher
+在doDispatcher方法中，调度到具体的Controller中，并返回一个ModelAndView的对象
 ```java
 // Actually invoke the handler. 实际上调用处理程序。
 mv = ha.handle(processedRequest, response, mappedHandler.getHandler());
@@ -32,7 +34,8 @@ private void applyDefaultViewName(HttpServletRequest request, @Nullable ModelAnd
 
 ```
 ---
-## 4、拦截器（前置拦截器和后置拦截器）
+## 4、拦截器
+分为：前置拦截器和后置拦截器
 
 ```java
 if (!mappedHandler.applyPreHandle(processedRequest, response)) {
@@ -52,7 +55,9 @@ mappedHandler.applyPostHandle(processedRequest, response, mv);
 可以注意到再调用具体的controller和解析视图的前后，分别有`applyPreHandle`和`applyPostHandle`两个方法  
  
  ---
-## 5、processDispatchResult处理调度结果，例如异常捕获等
+## 5、processDispatchResult
+processDispatchResult处理调度结果，例如异常捕获等
+
  ```
 /**
  * Handle the result of handler selection and handler invocation, which is

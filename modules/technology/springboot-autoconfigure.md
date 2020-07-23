@@ -1,4 +1,4 @@
-# 关于springboot自动化配置的实现
+# springboot自动化配置
 
 ## Enable相关注解
 1. `@SpringBootApplication`包含了`@SpringBootConfiguration(等同于@Configuration),@EnableAutoConfiguration,@ComponentScan`
