@@ -122,7 +122,7 @@ public class WarApplication extends SpringBootServletInitializer {
 	}
 }
 ```
-:::warn
+:::warning
 还有springboot war包的插件
 :::
 
