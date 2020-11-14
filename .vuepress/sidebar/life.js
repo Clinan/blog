@@ -23,6 +23,13 @@ module.exports = [
         ]
     },
     {
+        title: '男孩子要保护自己',
+        collapsable: true, 
+        children: [
+            '/modules/life/男孩子要保护自己',
+        ]
+    },
+    {
         title: '杂记，随思',
         collapsable: true, 
         children: [
