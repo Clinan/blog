@@ -91,3 +91,19 @@ from aa a,
 - 查询结果是一个aa,bb的笛卡尔积，即aa x bb 
 - aa表的每一条数据都去左连接bb表的所有数据。
 - 结果一共有(aa表的条数乘以bb表的条数)条
+
+
+## MYSQL查询分析
+
+`show profiles;`
+
+`show profile for query 45;`
+
+## 尽量避免使用NULL值
+如果查询中包含可为NULL的列，对Mysql来说更难优化，因为可为NULL的列使得索引、索引统计和值比较都更复杂。
+可为NULL的列会使用更多的存储空间，在MySql里也需要特殊处理。当可为NULL的列被索引时，每个索引记录需要一个额外的字节。
+通常把可为NULL的列改为NOT NULL带来的性能提升比较小。但是如果计划在列上建立索引，就应该尽量避免设计成为可为NULL的列.
+
+## 关于varchar text 等的使用
+应该尽量避免磁盘内存表
+![](https://cdn.clinan.xyz/mysql_learn_8.png)

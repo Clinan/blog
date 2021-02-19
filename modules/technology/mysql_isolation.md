@@ -57,6 +57,10 @@ This level is like REPEATABLE READ, but InnoDB implicitly converts all plain SEL
 `SERIALIZABLE`是事务隔离级别中级别最高的，此级别类似于REPEATABLE READ，但是InnoDB将所有普通SELECT 语句隐式转换为SELECT ... FOR SHARE， autocommit禁用。如果 autocommit启用，则 SELECT是其自身的事务。因此，它被认为是只读的，并且如果以一致的（非锁定）读取方式执行并且不需要阻塞其他事务就可以序列化。（SELECT如果其他事务已修改所选行，则要强制平原 阻止，请禁用 autocommit。）
 
 
+## 幻读和不可重复度
+- 幻读针对的是insert的操作
+- 不可重复度针对的是update操作
+
 
 ## 查看MYSQL的事务隔离级别
 ```sql
@@ -69,6 +73,15 @@ select @@transaction_isolation; # mysql8.0+
 set session transaction isolation level # 后面加上上诉的级别 如
 set session transaction isolation REPEATABLE READ;
 ```
+
+## innodb的Repeatable read
+基于MVCC（多版本并发控制），innodb不会出现幻读  
+innodb默认会给每个表额外的增加两列，一列保存行的创建时的系统版本号，一列保存行的删除时的系统版本号。
+系统版本号会自动递增。  
+每次开启新的事务时，当前的系统版本号会作为事务的系统版本号，用来CURD表。查到的数据只能是小于或等于当前系统版本号的数据  
+- 删除列，将当前版本号设置到删除位上。
+- 插入列，将当前版本号设置到创建位上。
+- 更新列，插入一条新的数据，并标识删除旧的数据。
 
 ## 总结
 数据库事务隔离级别越高，说明涉及到的锁越多，发生死锁的可能性越大，同时锁多了会影响数据库的并发性能，一般来说使用默认的`REPEATABLE READ`是最好的。其次就是`READ COMMITTED`，最高的和最低的，最好都不要设置。
