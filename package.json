@@ -19,7 +19,7 @@
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
     "node-sass": "^4.14.1",
-    "qiniu": "^7.3.1",
+    "qiniu": "^7.3.2",
     "sass-loader": "^8.0.2",
     "vuepress": "^1.5.2"
   }
