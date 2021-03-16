@@ -528,11 +528,17 @@ Java有6种线程状态
 
 ![](https://cdn.clinan.xyz/hotspot-mark-word.png)
 
+**工作过程：**
 
+在代码即将进入同步块的时候，如果此同步对象没有被锁定（锁标志位为“01”状态），虚拟机首先将在当前现场的栈帧中建立了一个名为锁记录（Lock Record）的空间，用于存储对象目前的Mark Word的拷贝（官方为这份拷贝加了一个Displaced前缀，即Displaced Mark Word），这时候
 
 #### 偏向锁
 
+如果说轻量级锁实在无竞争的情况下使用CAS操作去消除同步使用的互斥量，那偏向锁就是在无竞争的情况下把整个同步都消除掉，连CAS操作都不去做了。
 
+参数`-XX:+/-UseBiasedLocking`，开启关闭偏向锁，默认开启
+
+![](https://cdn.clinan.xyz/biased-lock.png)
 
 #### 
 
