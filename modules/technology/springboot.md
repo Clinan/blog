@@ -34,7 +34,20 @@ public class MyApplication extends SpringBootServletInitializer {
 
 ## WebApplication的创建
 
-
 ## 
+
+
+
+
+
+# spring使用的设计模式
+
+- **工厂模式** BeanFactory
+- **代理模式** AOP
+- **单例模式** 单例Bean
+- **模板方法模式** JdbcTemplate
+- **适配器模式** Advice，异常捕获
+- **责任链模式** FilterProxyChain
+- 
 
 

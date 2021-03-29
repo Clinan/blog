@@ -130,6 +130,7 @@ from aa a,
 - 间隙锁(gap lock):锁定某一行到某一行直接的所有记录.
 - 下一键锁(next-key lock): 锁定可能插入数据的行  
   
+
 假定索引包含值10、11、13和20。此索引的可能的下一键锁定涵盖以下间隔，其中，圆括号表示排除区间端点，方括号表示包括端点：
 ```
 (negative infinity, 10]
@@ -138,3 +139,52 @@ from aa a,
 (13, 20]
 (20, positive infinity)
 ```
+
+## [explain](https://dev.mysql.com/doc/refman/8.0/en/explain-output.html)
+
+效率从高到低
+
+#### TYPE
+
+1. system
+   - 查询的表只有一行，这是`const`类型的特例
+2. const
+   - 该表最多具有一个匹配行，该行在查询开始时读取。因为只有一行，所以优化器的其余部分可以将这一行的列的值视为常量，const非常快，因为它只读取一次
+3. eq_ref
+   - 连表使用索引的所有部分并且索引为`PRIMARY KEY`或`UNIQUE NOT NULL`时。一般是主键索引和唯一索引全部匹配时会出现
+4. ref
+   - 如果不是主键索引或全部匹配的唯一索引，换句话说，就是使用了索引，但是索引匹配到的值不是一行，那么就是`ref`
+5. fulltext 使用FULLTEXT索引进行join
+6. ref_or_null 
+   - 类似`ref`，但是除了MySQL对包含NULL值的行进行了额外的搜索之外。最常出现在解析子查询，如`select * from ref_table where column or column is NULL`.
+7. index_merge
+   - 合并索引，key列会输出所用的索引
+8. unique_subquery
+   - eq_ref的IN查询
+9. index_subquery
+   - ref的In查询
+10. range
+    - 使用索引选择行，仅检索给定范围内的行，如 `where create_time > '2020-12-01'`
+    - `range`当一个键列使用任何的相比于恒定可使用 `=`， `<>`，`>`，`>=`,`<`，`<=`,`IS NULL`,`<=>`,`BETWEEN`,`LIKE`,`IN()`  
+11. index
+    - 扫描索引树。当查询仅使用属于单个索引一部分的列时，MySQL可以使用此连接类型。
+12. ALL
+    - 没有索引，全表扫描
+
+
+
+
+
+## 查看死锁
+
+- `show engine innodb status`查看innodb状态
+
+- 查找以下内容
+
+  ```log
+  ------------------------
+  LETEST DETECTED DEADLOCK
+  ------------------------
+  ```
+
+- 查看下面的日志，寻找死锁导致的sql

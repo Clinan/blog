@@ -15,6 +15,11 @@ module.exports = [
             '/modules/technology/big_data_export',
             '/modules/technology/mybatis',
             '/modules/technology/redis',
+            '/modules/technology/dubbo-nacos',
+            '/modules/technology/elasticsearch',
+            '/modules/technology/kafka',
+            '/modules/technology/spring-mvc',
+            '/modules/technology/java',
         ]
     },
     {
