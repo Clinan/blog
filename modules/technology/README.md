@@ -1,5 +1,53 @@
 # 目录 
 <Card 
+    name="阿里亿级高并发系统设计"
+    image="https://cdn.clinan.xyz/others.jpg" 
+    url="/modules/technology/alibaba_book"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc=""
+    />
+<Card 
+    name="tcpip"
+    image="https://cdn.clinan.xyz/others.jpg" 
+    url="/modules/technology/tcpip"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc=""
+    />
+<Card 
+    name="kafka"
+    image="https://cdn.clinan.xyz/others.jpg" 
+    url="/modules/technology/kafka"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc=""
+    />
+<Card 
+    name="JVM"
+    image="https://cdn.clinan.xyz/others.jpg" 
+    url="/modules/technology/JVM"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc=""
+    /> 
+<Card 
+    name="dubbo-nacos"
+    image="https://cdn.clinan.xyz/others.jpg" 
+    url="/modules/technology/dubbo-nacos"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc=""
+    /> 
+<Card 
+    name="redis"
+    image="https://cdn.clinan.xyz/others.jpg" 
+    url="/modules/technology/redis"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc=""
+    /> 
+<Card 
     name="CSS Module踩坑"
     image="https://cdn.clinan.xyz/css-modules-logo.png" 
     url="/modules/technology/CSS_Module踩坑"

@@ -20,6 +20,8 @@ module.exports = [
             '/modules/technology/kafka',
             '/modules/technology/spring-mvc',
             '/modules/technology/java',
+            '/modules/technology/tcpip',
+            '/modules/technology/alibaba_book',
         ]
     },
     {
