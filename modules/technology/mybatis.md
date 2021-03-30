@@ -44,7 +44,11 @@ Mybatis的配置类,可以在这里配置Mysql的配置项
 不会,每次增删改查后,都会清空本地缓存.
 
 ### 二级缓存
+
+针对的是每个namespace的缓存，每次编辑数据之后都会重置
+
 默认关闭, 可以
+
 - eviction 配置缓存算法`LRU`, 
 - flushInterval 刷新的时间间隔, 单位毫秒, 
 - size 缓存的引用大小.
@@ -65,7 +69,7 @@ Mybatis的配置类,可以在这里配置Mysql的配置项
   
 - `org.apache.ibatis.mapping.MappedStatement#getBoundSql ` 
 -  `rootSqlNode.apply(context);` 在此处会调用各自的实力对象，对数组里的每个SqlNode对象进行apply，root一般是MixedSqlNode,最后根据顺序拼接为String
-    
+   
   - ` sqlSourceParser.parse(context.getSql(), parameterType, context.getBindings());`处理sql里的参数，排序好参数，便于构建sql的`Statement`
 
 
