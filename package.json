@@ -10,17 +10,17 @@
   "keywords": [],
   "dependencies": {
     "valine": "^1.4.14",
-    "vue": "^2.6.11"
+    "vue": "^2.6.12"
   },
   "devDependencies": {
-    "@vuepress/plugin-active-header-links": "^1.5.2",
-    "@vuepress/plugin-back-to-top": "^1.5.2",
-    "@vuepress/plugin-nprogress": "^1.5.2",
+    "@vuepress/plugin-active-header-links": "^1.8.2",
+    "@vuepress/plugin-back-to-top": "^1.8.2",
+    "@vuepress/plugin-nprogress": "^1.8.2",
     "axios": "^0.19.2",
-    "cheerio": "^1.0.0-rc.3",
+    "cheerio": "^1.0.0-rc.5",
     "node-sass": "^4.14.1",
     "qiniu": "^7.3.2",
     "sass-loader": "^8.0.2",
-    "vuepress": "^1.5.2"
+    "vuepress": "^1.8.2"
   }
 }
