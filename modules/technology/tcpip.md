@@ -69,7 +69,7 @@
 
 ## MTU 最大传输单元
 
-
+链路层网络中（例如以太网）中，携带高层协议的大小是有限制的。以太网有效负荷的字节数通常被限制为1500，`PPP`通常也采用相同大小以保持与以太网兼容。链路层的这种性质被称为**最大传输单元`MTU`**
 
 
 
@@ -230,30 +230,15 @@ note over Client,Server: 在发出LastACK之后，到至少Server的重传FIN到
 
 在TCP头部中，是没有记录IP的，所以在主动关闭方来说，目标端口固定的情况下，自身随机端口，是有可能用完的65535个端口的。
 
-
-
-例外的：
-
-- 序列号大于最大的序列号
-- 
-
-解决方案：调整MSL的时间为30s，可以尽快释放一些元组
-
-- [ ] TODO 
-
-
+解决方案：在Linux中调整MSL的时间为30s，Http使用Http1.1，使用`KeepAlive`，TCP采用保活机制。
 
 #### CLOSE_WAIT
 
-如果使用HttpClient不关闭`InputStream`，也会导致占用，而且情况比TIME_WAIT更严重，因为它不会释放
-
-
+如果使用`HttpClient`不关闭`InputStream`，也会导致占用，而且情况比TIME_WAIT更严重，因为它不会释放TCP连接。如果没有配置TCP保活机制，则服务器会一直处于CLOSE_WAIT状态。
 
 #### 静默时间
 
-一般操作系统都不会再实现了
-
-
+在三次握手之前，静默一个MSL。现在一般操作系统都不会再实现了。
 
 #### 重置报文段
 
@@ -275,8 +260,6 @@ note right of Client: 这个过程会被重试几次
 
 此外，也可以通过发送重置报文替代FIN来替代FIN终止一条连接，也被成为**终止释放**
 
-
-
 ### 超时与重传
 
 - 每次重传间隔时间加倍称为 **二进制指数退避**
@@ -288,10 +271,6 @@ note right of Client: 这个过程会被重试几次
   - Linux中R1=`net.ipv4.tcp_retries1`默认值为3次，R2=`net.ipv4.tcp_retries2`默认值为15次，约为13~30分钟
   - 对于SYN报文
     - `net.ipv4.tcp_syn_retries`和`net.ipv4.tcp_synack_retries`限定重传次数，默认值为5，约180s
-
-
-
-
 
 #### 设置重传超时时间RTO
 
@@ -341,7 +320,7 @@ TCP发送端在观测到至少`dupthresh`(成为重复ACK阈值)个重复ACK后�
 
 ### 数据流
 
-#### 延时确认
+#### 延时确认（delayed-ACK）
 
 延时ACK针对的是接收端
 
@@ -371,23 +350,166 @@ Nagle算法针对数据发送端。
 
 但是会导致网络有了更大的延迟。
 
-### 窗口滑动
+### 流量控制和窗口滑动
+
+流量控制因为当数据发送方的发送速率超过接收方的处理速度。会导致很多没有必要的重传，导致网络拥塞。
+
+窗口滑动是流量控制的一种方案。
+
+TCP头部中的窗口大小最大为65535，**单位为字节，而不是段**。**此外MSS的单位也是字节**
+
+#### TCP的窗口控制
+
+##### 发送窗口
+
+<table>
+    <tr>
+        <td align="center" colspan = "3"></td>
+        <td align="center" colspan = "5">提供窗口（SND.WND）</td>
+        <td align="center" colspan="3"></td>
+    </tr>
+    <tr>
+        <td align="center" colspan="1">...</td>
+        <td align="center" colspan="1">5</td>
+        <td align="center" colspan="1">6</td>
+        <td align="center" colspan="1">7</td>
+        <td align="center" colspan="1">8</td>
+        <td align="center" colspan="1">9</td>
+        <td align="center" colspan="1">10</td>
+        <td align="center" colspan="1">11</td>
+        <td align="center" colspan="1">12</td>
+        <td align="center" colspan="1">13</td>
+        <td align="center" colspan="1">...</td>
+    </tr>
+    <tr>
+        <td align="center" colspan="3">已发送并已确认</td>
+        <td align="center" colspan="3">已发送但未确认</td>
+        <td align="center" colspan="2">即将发送（可用窗口）</td>
+        <td align="center" colspan="3">直到窗口移动前都不能发送</td>
+    </tr>
+    <tr>
+        <td align="center" colspan="2"></td>
+        <td align="center" colspan="2">左边界（SND.UNA）</td>
+        <td align="center" colspan="1"></td>
+         <td align="center" colspan="2">SND.NXT</td>
+        <td align="center" colspan="2">右边界（SND.UNA+SND.WND）</td>
+        <td colspan="2"></td>
+    </tr>
+</table>
 
 
+#####  **接收窗口**
 
-### 流量控制
+<table>
+    <tr>
+        <td align="center" colspan = "3"></td>
+        <td align="center" colspan = "5">接收窗口（REV.WND）</td>
+        <td align="center" colspan="3"></td>
+    </tr>
+    <tr>
+        <td align="center" colspan="1">...</td>
+        <td align="center" colspan="1">5</td>
+        <td align="center" colspan="1">6</td>
+        <td align="center" colspan="1">7</td>
+        <td align="center" colspan="1">8</td>
+        <td align="center" colspan="1">9</td>
+        <td align="center" colspan="1">10</td>
+        <td align="center" colspan="1">11</td>
+        <td align="center" colspan="1">12</td>
+        <td align="center" colspan="1">13</td>
+        <td align="center" colspan="1">...</td>
+    </tr>
+    <tr>
+        <td align="center" colspan="3">已接收并确认</td>
+        <td align="center" colspan="5">接收后将会保存</td>
+        <td align="center" colspan="3">不能接收</td>
+    </tr>
+    <tr>
+        <td align="center" colspan="2"></td>
+        <td align="center" colspan="2">左边界（REV.NXT）</td>
+        <td align="center" colspan="3"></td>
+        <td align="center" colspan="2">右边界（REV.NXT+REV.WND）</td>
+        <td colspan="2"></td>
+    </tr>
+</table>
+传统的TCP的累积ACK结构，只有当到达数据序列号等于左边界时，数据才不会被丢失，窗口才能向前滑动。
 
+对于选择确认ACK，使用`SACK`选项，窗口内的报文段也可以被接收确认，但只有在接收到等于左边界的序列号数据时，窗口才能前移。
 
+#### 零窗口与TCP持续计时器
+
+当窗口值为0时，可以有效阻止发送端继续发送，知道窗口大小恢复为非零值。当接收端重新获得可用窗口时，会给发送端传输一个**窗口更新**（window update），告知其可继续发送数据。这样的窗口更新都不包含数据（所以也不会超时重传），不能保证可靠性。
+
+如果`window update`的ACK丢失，通信双方会一直处于等待状态。
+
+**解决方案：**
+
+发送端会采用一个**持续计时器**间歇性地查询接收端，看其端口是否已增长。具体的，持续计时器会触发**窗口探测（window probe）**的传输，强烈要求接收端返回ACK（其中包含窗口大小字段）。
+
+`window prove`包含一个字节的数据，这样可以超时重传。因此可以避免窗口丢失的死锁。
 
 ### 拥塞控制
 
-### 
+拥塞控制在网络中有很大的作用，当所有主机都以自己最大的能力持续的发送数据段，在网络环境很差的情况下，数据段又一直不能被接收方接收到（发送方收不到ACK），发送方就会超时重传。如果一直接收不到ACK就会一直超时重传，最终会导致阻塞在网络中的数据越来越多。最后将整个网络通信堵塞。
 
-### delayed-ACK
+但是另一方面又想最大限度的使用网络，然而网络通信的复杂性导致无法了解这个最大限度的值，并且这个值是动态的，每次网络波动之后，都需要重新去寻找这个阈值，所以只能一点点的逼近，一旦超过，就立即返回之前的数据发送大小。
 
+#### 减缓TCP发送
 
+可用窗口`W=min(cwnd, awnd)`，`cwnd`为拥塞端口大小，`awnd`为接收方窗口大小。一般来说，计算机发送和接收端都不能精确的计算`cwnd`的值。并且这个值是在动态变化的。
 
+#### 慢启动
 
+在传输初始的时候，由于网络传输能力未知。需要缓慢探测可用传输资源，防止短时间内大量数据注入导致拥塞。
+
+##### 场景
+
+- 创建新的TCP连接时
+- 检测到由重传超时（RTO）导致的丢包时，需要执行慢启动。
+- TCP发送端长时间空闲状态也可能调用慢启动算法。
+
+##### 目的
+
+在用拥塞避免的方法探寻更多可用带宽之前的`cwnd`值，以帮助TCP建立ACK时钟。
+
+##### 创建连接时的慢启动
+
+在创建新连接时执行慢启动，直至有丢包时，执行拥塞避免算法（下一小节）进入稳定状态。
+
+具体的：
+
+1. TCP以发送一定数量的数据段开始慢启动（SYN交换之后），成为**初始窗口（`IW`）**，`IW`的初始值设为1`SMSS`（发送方的最大段大小）。
+2. 在接收到一个数据段的ACK之后，通常`cwnd`会增加到2，接着发送2个数据段。
+3. 如果对应的接收到新的ACK，`cwnd`会由2变成4、然后到8。呈指数级上升。
+4. 呈指数上升之后，`cwnd`会非常大，一旦发生丢包，`cwnd`将立即减为原来的一半，即上一次没有发生丢包的`cwnd`。**这就是慢启动转为拥塞避免阶段的转折点**。此时的`cwnd`也就是慢启动的**阈值**（`ssthresh`）
+
+#### 拥塞避免
+
+在通过慢启动确认慢启动阈值之后，`cwnd`的增长将会转为**线性增长**。可以逐步尽可能的使用更多的网络资源。也避免大量的数据堵塞整个传输网络。
+
+其中如果要是开启了延时ACK，则增长速率会比正常的线性增长还要慢一些。
+
+#### 快速恢复
+
+BSD Tahoe版本的TCP，在检测到丢包之后，无论是超时还是快速重传，都会重新开始进入慢启动状态。在有丢包的情况发生时，`Tahoe`简单地将`cwnd`减为初始值（1SMSS），以达到慢启动的目的。知道找到新的阈值`ssthresh`
+
+导致宽带利用率低下。
+
+在BSD Reno版中，在遇到因为快速重传（发送方收到重复的ACK）时，`cwnd`被设置为上一个`ssthresh`。而无需重新慢启动。但是在大多数的TCP版本中，超时导致的慢启动问题还是存在。
+
+#### `NewReno`
+
+快速恢复带来了一个新的问题，当一个传输窗口中出现多个数据包丢失时，一旦其中一个包重传成功，发送方就会接收到一个成功的 ACK，这样快速恢复中`cwnd`窗口的暂时膨胀就会停止，而事实上丢失的其他数据包坑你未完成重传。导致出现这种情况的ACK成为局部ACK（`partial ACK`）。Reno算法在接收到局部ACK后就停止拥塞窗口膨胀阶段，并将其减小到特定值。这会严重的浪费网络性能。
+
+`NewReno`算法提出，记录上一个数据传输窗口的最高序列号，仅当接收到序列号不小于恢复点的ACK才停止快速恢复阶段。这样TCP发送方每接收一个ACK后就能继续发送一个新数据段，从而减少重传超时的发生。
+
+### 保活机制
+
+三个变量
+
+1. 保活时间：`net.ipv4tcp_keepalive_time`=7200s (2h)
+2. 保活时间间隔：`net.ipv4.tcp_keepalive_intvl`=75s
+3. 保活探测次数：`net.ipv4.tcp_keepalive_probes`=9
 
 ## HTTP
 
