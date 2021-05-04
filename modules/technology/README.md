@@ -1,7 +1,7 @@
 # 目录 
 <Card 
     name="阿里亿级高并发系统设计"
-    image="https://cdn.clinan.xyz/others.jpg" 
+    image="https://cdn.clinan.xyz/others.jpeg" 
     url="/modules/technology/alibaba_book"
     category="TECHNOLOGY"
     author="Clinan"
@@ -9,7 +9,7 @@
     />
 <Card 
     name="tcpip"
-    image="https://cdn.clinan.xyz/others.jpg" 
+    image="https://cdn.clinan.xyz/others.jpeg" 
     url="/modules/technology/tcpip"
     category="TECHNOLOGY"
     author="Clinan"
@@ -17,7 +17,7 @@
     />
 <Card 
     name="kafka"
-    image="https://cdn.clinan.xyz/others.jpg" 
+    image="https://cdn.clinan.xyz/others.jpeg" 
     url="/modules/technology/kafka"
     category="TECHNOLOGY"
     author="Clinan"
@@ -25,7 +25,7 @@
     />
 <Card 
     name="JVM"
-    image="https://cdn.clinan.xyz/others.jpg" 
+    image="https://cdn.clinan.xyz/others.jpeg" 
     url="/modules/technology/JVM"
     category="TECHNOLOGY"
     author="Clinan"
@@ -33,7 +33,7 @@
     /> 
 <Card 
     name="dubbo-nacos"
-    image="https://cdn.clinan.xyz/others.jpg" 
+    image="https://cdn.clinan.xyz/others.jpeg" 
     url="/modules/technology/dubbo-nacos"
     category="TECHNOLOGY"
     author="Clinan"
@@ -41,7 +41,7 @@
     /> 
 <Card 
     name="redis"
-    image="https://cdn.clinan.xyz/others.jpg" 
+    image="https://cdn.clinan.xyz/others.jpeg" 
     url="/modules/technology/redis"
     category="TECHNOLOGY"
     author="Clinan"
