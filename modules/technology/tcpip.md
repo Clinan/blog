@@ -147,6 +147,10 @@
         <td colspan = '32'>选项</td>
     </tr>
 </table>
+##### PSH标志位
+
+在传输大数据的时候，在TCP中会分块传输。如果遇到设置了PSH位的数据段，则将当前数据段中的数据和缓存中的数据都提交给应用层，并清空缓存。而不用继续等待或判断后续是否还有数据传输过来。
+
 ##### 选项
 
 MSS（maximum segment size）：最大报文段
@@ -230,11 +234,23 @@ note over Client,Server: 在发出LastACK之后，到至少Server的重传FIN到
 
 在TCP头部中，是没有记录IP的，所以在主动关闭方来说，目标端口固定的情况下，自身随机端口，是有可能用完的65535个端口的。
 
-解决方案：在Linux中调整MSL的时间为30s，Http使用Http1.1，使用`KeepAlive`，TCP采用保活机制。
+##### 解决方案
+
+在Linux中调整MSL的时间为30s，Http使用Http1.1，使用`KeepAlive`，TCP采用保活机制。
 
 #### CLOSE_WAIT
 
 如果使用`HttpClient`不关闭`InputStream`，也会导致占用，而且情况比TIME_WAIT更严重，因为它不会释放TCP连接。如果没有配置TCP保活机制，则服务器会一直处于CLOSE_WAIT状态。
+
+##### 解决方案
+
+查看代码，关注`HttpClient`的使用，[相关博客](https://blog.csdn.net/shootyou/article/details/6615051)
+
+#### CLOSE_WAIT和TIME_WAIT查看
+
+`netstat -n | awk *'/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'*`
+
+
 
 #### 静默时间
 
@@ -513,13 +529,69 @@ BSD Tahoe版本的TCP，在检测到丢包之后，无论是超时还是快速�
 
 ## HTTP
 
+### 方法
+
+#### PUT
+
+目的是让服务器用请求的主体部分来创建一个由请求的URL命名的新文档。如果那个URL已经存在的话，就用这个主体替代。
+
+```http
+PUT /files/images/upload.png
+Host: www.xxx.com
+
+... 文件流
+```
+
+
+
+#### HEAD
+
+不返回数据，只返回头部。这就允许在不获取实际数据的情况下，了解数据的情况，并且也可以对返回体头部进行校验
+
+作用如下：
+
+- 在不获取资源的情况下了解资源
+- 通过查看状态码，了解某个对象是否存在
+- 通过查看首部，测试资源是否被修改
+
+#### POST
+
+通常是表单的传输
+
+
+
+#### TRACE
+
+客户端发出一个请求后，可能会经过防火墙，代理，网关或一些其他应用程序。
+
+每个中间节点都有可能修改原始的HTTP请求。TRACE方法允许客户端在最终将请求发给服务器时，看看它变成了什么样子。
+
+TRACE会在目的服务器发起一个环回诊断，最后的服务器会弹回一条TRACE相应，并在响应主体中携带它收到的原始请求报文。
+
+#### OPTIONS
+
+请求Web服务器告知其支持的各种功能。如跨域。也包含各种支持的方法
+
+```http
+access-control-allow-origin:	*
+allow:	GET,HEAD,POST,PUT,PATCH,DELETE,OPTIONS
+cache-control:	no-cache, no-store, max-age=0, must-revalidate
+date:	Thu, 06 May 2021 03:11:11 GMT
+expires:	0
+pragma:	no-cache
+x-content-type-options:	nosniff
+x-xss-protection:	1; mode=block
+
+
+```
+
+
+
 ### Header
 
 #### Connection: keep-alive 
 
 复用TCP连接，使用客户端到服务器的连接持续有效。当客户端对服务器有后续请求时，Keep-alive能够避免重建连接。
-
-
 
 
 
