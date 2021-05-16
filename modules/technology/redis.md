@@ -264,6 +264,23 @@ Redis服务器是一个事件驱动程序
 
 
 
+## 内存策略
+
+### 限制内存大小
+
+`config set maxmemory 100MB`
+
+### 回收策略
+
+- `noevication`：返回错误，当内存限制达到并且客户端尝试写入等使用到内存的命令。
+- `allkeys-lru`：尝试回收最少使用的键
+- `volatile-lru`：尝试回收最少使用的键，仅是过期集合的key
+- `allkeys-random`：随机回收key
+- `volatile-random`：随机回收key,  这些key仅是过期的key
+- `volatile-ttl`：回收过期key的集合，并且优先回收过期时间(TTL)较短的key
+
+
+
 
 ## 应用
 
@@ -285,3 +302,4 @@ set lockkey 1 EX 100 NX
 
 
 
+## 
