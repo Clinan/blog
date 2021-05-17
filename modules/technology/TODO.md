@@ -2,24 +2,6 @@
 
 ODS, DWD DWS, ADS,
 
-
-
-
-
-
-
-## mysql 锁
-
-## kafka 多个消费者对一个分区
-
-## kafka log清理
-
-https://blog.csdn.net/weixin_38750084/article/details/83037938
-
-## kafka avro
-
-
-
 ## Kafka流
 
 

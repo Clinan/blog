@@ -45,7 +45,6 @@ Only row-based binary logging is supported with the READ COMMITTED isolation lev
 
 SELECT statements are performed in a nonlocking fashion, but a possible earlier version of a row might be used. Thus, using this isolation level, such reads are not consistent. This is also called a dirty read. Otherwise, this isolation level works like READ COMMITTED.
 
-
 `READ UNCOMMITTED`是事务隔离级别最低，以非锁定的方式执行。如：会话A中可以查询到会话B中更新插入删除的数据，如果B回滚了，那么A读取到就是已经被B回滚掉的脏数据，一般都不会使用这个隔离级别。
 
 - SERIALIZABLE
@@ -59,7 +58,7 @@ This level is like REPEATABLE READ, but InnoDB implicitly converts all plain SEL
 
 ## 幻读和不可重复度
 - 幻读针对的是insert的操作
-- 不可重复度针对的是update操作
+- 不可重复读针对的是update操作
 
 
 ## 查看MYSQL的事务隔离级别
@@ -82,6 +81,12 @@ innodb默认会给每个表额外的增加两列，一列保存行的创建时�
 - 删除列，将当前版本号设置到删除位上。
 - 插入列，将当前版本号设置到创建位上。
 - 更新列，插入一条新的数据，并标识删除旧的数据。
+
+
+
+## 锁
+
+
 
 ## 总结
 数据库事务隔离级别越高，说明涉及到的锁越多，发生死锁的可能性越大，同时锁多了会影响数据库的并发性能，一般来说使用默认的`REPEATABLE READ`是最好的。其次就是`READ COMMITTED`，最高的和最低的，最好都不要设置。
