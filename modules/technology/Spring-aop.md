@@ -119,7 +119,7 @@ AbstractAutoProxyCreator.postProcessAfterInitialization{
 				}
                 // 这个方法真正返回一个代理对象
                 (AopProxy)aopProxy.getProxy{
-                    
+                    // 返回jdk动态代理或者是cglib生成的代理对象
                 }
 			}
 		}
@@ -149,7 +149,7 @@ public AopProxy createAopProxy(AdvisedSupport config) throws AopConfigException 
 	}
 ```
 
-
+r
 
 advisors的来源（Advice的来源）
 

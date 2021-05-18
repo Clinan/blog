@@ -49,7 +49,7 @@ private DemoService demoService;
 
   ```java
   RegistryFactory registryFactory = ExtensionLoader.getExtensionLoader(RegistryFactory.class).getAdaptiveExtension();
-  Registry registry = registryFactory.getRegistry(URL.valueOf("zookeeper://10.20.153.10:2181"));
+  Registry registry = registryFactory.getRegistry(URL.valueOf("zookeeper://localhost:2181"));
   registry.register(URL.valueOf("override://0.0.0.0/com.foo.BarService?category=configurators&dynamic=false&application=foo&mock=force:return+null"));
   ```
 
@@ -79,7 +79,7 @@ private DemoService demoService;
 - `execution` 只有请求消息派发到线程池，不含响应，响应和其它连接断开事件，心跳等消息，直接在 IO 线程上执行。
 - `connection` 在 IO 线程上，将连接断开事件放入队列，有序逐个执行，其它消息派发到线程池。
 
-#### ThreadPool
+#### `ThreadPool`
 
 - `fixed` 固定大小线程池，启动时建立线程，不关闭，一直持有。(缺省)
 - `cached` 缓存线程池，空闲一分钟自动删除，需要时重建。
