@@ -5,7 +5,7 @@ cache: yarn
 install:
     - yarn install
 script:
-    - node ./cdn.js
+    # - node ./cdn.js
     - yarn run docs:build
 after_success:
     - cp dist.gitignore ./.vuepress/dist/.gitignore
