@@ -6,7 +6,7 @@
     url="/modules/technology/architecture/alibaba_book"
     category="TECHNOLOGY"
     author="Clinan"
-    desc=""
+    desc="一些简单的架构"
     />
 <Card 
     name="tcpip"
@@ -14,7 +14,7 @@
     url="/modules/technology/base/tcpip"
     category="TECHNOLOGY"
     author="Clinan"
-    desc=""
+    desc="TCP TIME_WAIT IP HTTP"
     />
 <Card 
     name="kafka"
@@ -22,7 +22,7 @@
     url="/modules/technology/middleware/kafka"
     category="TECHNOLOGY"
     author="Clinan"
-    desc=""
+    desc="kafka的使用和参数"
     />
 <Card 
     name="JVM"
@@ -30,7 +30,7 @@
     url="/modules/technology/java/JVM"
     category="TECHNOLOGY"
     author="Clinan"
-    desc=""
+    desc="JVM GC 类加载器 锁"
     /> 
 <Card 
     name="dubbo-nacos"
@@ -38,7 +38,7 @@
     url="/modules/technology/springcloud/dubbo-nacos"
     category="TECHNOLOGY"
     author="Clinan"
-    desc=""
+    desc="duboo+nacos"
     /> 
 <Card 
     name="redis"
@@ -46,11 +46,11 @@
     url="/modules/technology/middleware/redis"
     category="TECHNOLOGY"
     author="Clinan"
-    desc=""
+    desc="redis的源码阅读和常见问题"
     /> 
 <Card 
     name="CSS Module踩坑"
-    image="https://cdn.clinan.xyz/frontend/css-modules-logo.png" 
+    image="https://cdn.clinan.xyz/css-modules-logo.png" 
     url="/modules/technology/CSS_Module踩坑"
     category="TECHNOLOGY"
     author="ztyzbb"
@@ -74,7 +74,7 @@
     /> 
 <Card 
     name="Docker初始化"
-    image="https://cdn.clinan.xyz/others.jpeg" 
+    image="https://cdn.clinan.xyz/docker.png" 
     url="/modules/technology/docker_init"
     category="TECHNOLOGY"
     author="Clinan"
