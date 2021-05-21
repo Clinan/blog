@@ -3,24 +3,23 @@
 ## 用法
 
 - 在消费者中，配置负载均衡和集群容错
-
-```java
-@DubboReference(
-            // 负载均衡策略
-            loadbalance = LeastActiveLoadBalance.NAME,
-            // 集群容错策略
-            cluster = FailoverCluster.NAME,
-            // 容错中的failover的重试次数
-            retries = 1,
-            // 配置版本，在上线时做服务器增量更新很有用
-            version = "2.0",
-            // 当一个接口有多种实现时，可以用 group 区分。
-            group = "mygroup",
-            // 启动时不检查是否有服务可用
-            check = false
-    )
-private DemoService demoService;
-```
+    ```java
+    @DubboReference(
+                // 负载均衡策略
+                loadbalance = LeastActiveLoadBalance.NAME,
+                // 集群容错策略
+                cluster = FailoverCluster.NAME,
+                // 容错中的failover的重试次数
+                retries = 1,
+                // 配置版本，在上线时做服务器增量更新很有用
+                version = "2.0",
+                // 当一个接口有多种实现时，可以用 group 区分。
+                group = "mygroup",
+                // 启动时不检查是否有服务可用
+                check = false
+        )
+    private DemoService demoService;
+    ```
 
 - 在服务提供者中配置权重，组，版本
 
@@ -57,7 +56,7 @@ private DemoService demoService;
 
 ### 线程模型
 
-#### 配置 Dubbo 中的线程模型
+#### 配置 `Dubbo` 中的线程模型
 
 - 如果事件处理的逻辑能迅速完成，并且不会发起新的 IO 请求，比如只是在内存中记个标识，则直接在 IO 线程上处理更快，因为减少了线程池调度。
 
@@ -96,7 +95,7 @@ private DemoService demoService;
 
 
 
-### channelHandler
+### `channelHandler`
 
 
 
@@ -104,17 +103,17 @@ private DemoService demoService;
 
 
 
-## dubbo集群容错
+## `dubbo`集群容错
 
 工作流程
 
-1. 生成Invoker对象，不同的Cluster实现会生成不同类型的ClusterInvoker对象并返回。然后调用ClusterInvoker的invoker方法，正式开始调用流程
+1. 生成`Invoker`对象，不同的`Cluster`实现会生成不同类型的`ClusterInvoker`对象并返回。然后调用`ClusterInvoker`的`invoker`方法，正式开始调用流程
 
 2. 获取可调用的服务列表，再路由规则匹配，返回符合的服务列表
 
-3. 做负载均衡 。跟进用户的配置，调用ExtensionLoader获取不同的负载均衡策略的拓展点实现。然后做一些后置操作。如果是异步调用则设置调用编号。接着调用子实现的doInvoke方法，根据具体的负载均衡策略选出一个可以调用的服务。
+3. 做负载均衡 。跟进用户的配置，调用`ExtensionLoader`获取不同的负载均衡策略的拓展点实现。然后做一些后置操作。如果是异步调用则设置调用编号。接着调用子实现的`doInvoke`方法，根据具体的负载均衡策略选出一个可以调用的服务。
 
-4. 做RPC调用。首先保存每次调用的Invoker到RPC上下文，并作RPC调用。然后处理调用结果。
+4. 做`RPC`调用。首先保存每次调用的`Invoker`到`RPC`上下文，并作`RPC`调用。然后处理调用结果。
 
    
 
@@ -122,25 +121,25 @@ private DemoService demoService;
 
 
 
-#### Failover
+#### `Failover`
 
 失败可以重试，可以设置重试次数
 
 
 
-#### failfast
+#### `failfast`
 
 快速失败，只要失败一次就直接报错，通常用于非幂等性的写操作，比如新增记录。
 
 
 
-#### failsafe
+#### `failsafe`
 
 失败不报错，直接忽略。通常用于日志等不重要信息的集群。
 
 
 
-#### failback
+#### `failback`
 
 失败自动恢复，后台记录失败请求，定时重发。通常用于消息通知等操作。
 
@@ -160,23 +159,23 @@ private DemoService demoService;
 
 ### 负载均衡
 
-#### RandomLoadBalance
+#### `RandomLoadBalance`
 
 随机，按**权重设置**随机概率。如果刚启动机器，权重不高，需要预热好，慢慢请求的权重就会达到配置的权重
 
-#### RoundRobinLoadBalance
+#### `RoundRobinLoadBalance`
 
 轮询，按公约后的权重设置轮询比例。存在慢点提供者累积请求的问题。
 
 权重轮询，有普通权重轮询和平滑权重轮询。
 
-#### LeastActiveLoadBalance
+#### `LeastActiveLoadBalance`
 
 最少调用次数，如果活跃数相同则随机调用，活跃数指调用前后计数差，使慢的收到更少请求，因为越慢的提供者的调用前后的计数差会越大
 
 可以看出是Random负载均衡的**加强版**，
 
-#### ConsistentHashLoadBalance
+#### `ConsistentHashLoadBalance`
 
 一致性Hash，相同参数的请求总是发到同一提供者。当某一台提供者挂掉，原本发给该提供者的请求，基于虚拟节点，会平摊到其他提供者，不会引起剧烈变动
 
