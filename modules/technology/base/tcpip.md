@@ -163,7 +163,8 @@ Scale_Window(SW)：窗口缩放支持
 
 #### 连接 三次握手
 
-```sequence
+```mermaid
+sequenceDiagram
 Client->Server: SYN,Seq=ISN(c)
 Server->Client: SYN+ACK,Seq=ISN(s),ACK=ISN(c)+1
 Client->Server: ACK,Seq=ISN(c)+1, ACK=ISN(s)
@@ -176,7 +177,8 @@ note over Client, Server: ESTABLISHED，连通状态
 
 #### 关闭 四次握手
 
-```sequence
+```mermaid
+sequenceDiagram
 Note over Client,Server: ESTABLISHED，连通状态
 Client->Server: FIN,ACK, Seq=K,ACK=L
 note over Client: FIN_WAIT_1
@@ -213,7 +215,8 @@ TIME_WAIT是客户端发完确认关闭ACK之后，为避免还停留在网络�
 
 因为被关闭方可能会超时重传FIN，直到收到最终ACK。但是下一刻就收到主动关闭方的ACK，从发出`LastACK`的发出到接收到重传的FIN。客户端最多可以经历2MSL的时间。
 
-```sequence
+```mermaid
+sequenceDiagram
 note over Client,Server: 为什么是2MSL
 Server->Client:FIN+ACK,Seq=K,ACK=L
 note over Server: 等待确认关闭的ACK
@@ -262,7 +265,8 @@ note over Client,Server: 在发出LastACK之后，到至少Server的重传FIN到
 
 服务器会返回`ACK+RST, ACK=ISN(c)+1,Seq=0`的消息。这个过程会有重试
 
-```sequence
+```mermaid
+sequenceDiagram
 Client->Server: SYN, Seq=ISN(c)
 Server->Client: ACK+RST,Seq=0,ACK=ISN(c)+1
 note right of Client: 这个过程会被重试几次

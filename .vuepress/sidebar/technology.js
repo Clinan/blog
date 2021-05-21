@@ -1,53 +1,93 @@
 module.exports = [
     '/modules/technology/',
     {
+        title: '架构', // 侧边栏名称 
+        collapsable: true, // 可折叠 
+        children: [
+            '/modules/technology/architecture/alibaba_book'
+        ]
+    },{
         title: 'Java', // 侧边栏名称 
         collapsable: true, // 可折叠 
         children: [
-            '/modules/technology/Springboot配置Servlet原理',
-            '/modules/technology/SpringDispatcherServlet分析',
-            '/modules/technology/springboot-autoconfigure',
-            '/modules/technology/spring-HandlerMethodArgumentResolver',
-            '/modules/technology/JVM',
-            '/modules/technology/springboot',
-            '/modules/technology/springboot_init_flow',
-            '/modules/technology/spring-data-access',
-            '/modules/technology/big_data_export',
-            '/modules/technology/mybatis',
-            '/modules/technology/redis',
-            '/modules/technology/dubbo-nacos',
-            '/modules/technology/elasticsearch',
-            '/modules/technology/kafka',
-            '/modules/technology/spring-mvc',
-            '/modules/technology/java',
-            '/modules/technology/tcpip',
-            '/modules/technology/alibaba_book',
+            '/modules/technology/java/JVM',
+            '/modules/technology/java/big_data_export',
+            '/modules/technology/java/tomcat',
+            '/modules/technology/java/java',
         ]
     },
     {
-        title: '树莓派',
-        collapsable: true,
+        title: '中间件', // 侧边栏名称 
+        collapsable: true, // 可折叠 
         children: [
-            '/modules/technology/rasperry_init',
+            '/modules/technology/middleware/redis',
+            '/modules/technology/middleware/elasticsearch',
+            '/modules/technology/middleware/kafka',
+        ]
+    },
+    {
+        title: 'DB', // 侧边栏名称 
+        collapsable: true, // 可折叠 
+        children: [
+            '/modules/technology/db/hadoop',
+            '/modules/technology/db/mysql_isolation',
+            '/modules/technology/db/mysql_learn',
+        ]
+    },
+    {
+        title: 'Spring', // 侧边栏名称 
+        collapsable: true, // 可折叠 
+        children: [
+            '/modules/technology/spring/SPI启动',
+            '/modules/technology/spring/DispatcherServlet分析',
+            '/modules/technology/spring/springboot-autoconfigure',
+            '/modules/technology/spring/controller参数解析拦截',
+            '/modules/technology/spring/springboot',
+            '/modules/technology/spring/springboot_init_flow',
+            '/modules/technology/spring/spring-data-access',
+            '/modules/technology/spring/mybatis',
+            '/modules/technology/spring/spring-mvc',
+        ]
+    },
+    {
+        title: 'SpringCloud', // 侧边栏名称 
+        collapsable: true, // 可折叠 
+        children: [
+            '/modules/technology/springcloud/dubbo-nacos',
         ]
     },
     {
         title: 'Linux(Debian)',
         collapsable: true,
         children: [
-            '/modules/technology/rasperry_init',
+            '/modules/technology/linux-server/rasperry_init',
+            '/modules/technology/linux-server/docker_init',
+            '/modules/technology/linux-server/linux_bash',
+            '/modules/technology/linux-server/jenkins_mysql_gogs_install',
         ]
     },
     {
-        title: '杂技',
+        title: '前端',
         collapsable: true,
         children: [
-            '/modules/technology/vuepress_deploy',
-            '/modules/technology/mysql_learn',
-            '/modules/technology/mysql_isolation',
-            '/modules/technology/docker_init',
-            '/modules/technology/CSS_Module踩坑',
-            '/modules/technology/binary',
+            '/modules/technology/frontend/vuepress_deploy',
+            '/modules/technology/frontend/CSS_Module踩坑',
         ]
     },
+    {
+        title: '基础知识',
+        collapsable: true,
+        children: [
+            '/modules/technology/base/algorithm',
+            '/modules/technology/base/tcpip',
+            '/modules/technology/base/binary',
+        ]
+    },
+    // {
+    //     title: '其他',
+    //     collapsable: true,
+    //     children: [
+    //         '/modules/technology/vuepress_deploy'
+    //     ]
+    // },
 ]

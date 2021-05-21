@@ -4,7 +4,7 @@
       <article class="blog-card">
         <img class="post-image" :src="image" />
         <div class="article-details">
-          <h4 class="post-category">{{ category }}</h4>
+          <!-- <h4 class="post-category">{{ category }}</h4> -->
           <h3 class="post-title">{{ name }}</h3>
           <p class="post-description">{{ desc }}</p>
           <p class="post-author">By {{ author }}</p>

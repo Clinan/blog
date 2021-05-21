@@ -184,6 +184,7 @@ public AnnotationConfigServletWebServerApplicationContext() {
 }
 ```
 
+
 ### AbstractApplication.refresh()
 
 可以看到，run方法了，调用refresh()之前都是没有扫描bean的。只是准备了配置文件和监听器之类的。
