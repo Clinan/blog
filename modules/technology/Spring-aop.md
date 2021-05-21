@@ -344,7 +344,7 @@ protected TargetSource getCustomTargetSource(Class<?> beanClass, String beanName
 
 
 
-可以看到获取了bean工厂中的
+可以看到获取了bean工厂中的contains
 
 ## AOP解决循环依赖
 

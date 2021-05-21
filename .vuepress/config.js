@@ -47,6 +47,7 @@ module.exports = {
 
     },
     plugins: [
+        ['vuepress-plugin-mermaidjs'],
         ['@vuepress/nprogress'],
         ['@vuepress/search', {
             searchMaxSuggestions: 10
