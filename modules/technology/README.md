@@ -10,7 +10,7 @@
     />
 <Card 
     name="tcpip"
-    image="https://cdn.clinan.xyz/tcp.png" 
+    image="https://cdn.clinan.xyz/tcp_icon.png" 
     url="/modules/technology/base/tcpip"
     category="TECHNOLOGY"
     author="Clinan"
