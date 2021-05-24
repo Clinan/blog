@@ -30,7 +30,7 @@
 
 使用apache avro序列化
 
-avro的schema。定义字段名称和数据类型
+avro的schema。定义字段名称和数据类型。
 
 ## 消费者
 
