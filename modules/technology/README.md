@@ -57,9 +57,9 @@
     desc="开启CSS Module样式隔离后需要注意的坑"
     /> 
 <Card 
-    name="Springboot Token登录校验"
+    name="Springboot controller参数解析拦截"
     image="https://cdn.clinan.xyz/spring.png" 
-    url="/modules/technology/spring/"
+    url="/modules/technology/spring/controller参数解析拦截"
     category="TECHNOLOGY"
     author="Clinan"
     desc="Token登录校验中HandlerMethodArgumentResolver的使用"
@@ -115,7 +115,7 @@
 <Card 
     name="Springboot配置Servlet原理"
     image="https://cdn.clinan.xyz/spring-boot-java.jpg" 
-    url="/modules/technology/Springboot配置Servlet原理"
+    url="/modules/technology/SPI启动"
     category="TECHNOLOGY"
     author="Clinan"
     desc="Springboot配置Servlet原理"
@@ -123,7 +123,7 @@
 <Card 
     name="SpringDispatcherServlet分析"
     image="https://cdn.clinan.xyz/spring-boot-java.jpg" 
-    url="/modules/technology/SpringDispatcherServlet分析"
+    url="/modules/technology/DispatcherServlet分析"
     category="TECHNOLOGY"
     author="Clinan"
     desc="SpringDispatcherServlet分析"

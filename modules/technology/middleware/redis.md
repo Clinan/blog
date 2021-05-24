@@ -118,7 +118,7 @@ RPUSH 1st 1 3 5 10086 "hello" "world"
 
 
 
-## "quicklist"
+## quicklist
 
 一个由**ziplist组成的双向链表**。
 
