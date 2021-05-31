@@ -70,11 +70,7 @@ avro的schema。定义字段名称和数据类型。
 
 如果消费者群组里超过分区数量的消费者，那么会有一部分的消费者会被闲置。
 
-
-
 ![](https://cdn.clinan.xyz/kafka_consumer.png)
-
-
 
 ### 消息堆积
 

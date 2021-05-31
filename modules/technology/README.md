@@ -129,12 +129,3 @@
     desc="SpringDispatcherServlet分析"
     />
 </div>
-
-**TODO LIST**
-- [ ] 鸟哥的linux私房菜
-- [ ] Hive
-- [ ] golang
-- [ ] spring filter原理
-- [ ] spring IOC实现
-- [ ] spring bean的初始化
-- [ ] AUTH2
