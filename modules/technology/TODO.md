@@ -15,7 +15,7 @@ ODS, DWD DWS, ADS,
 - [ ] AQS
 - [ ] 学习多线程的编写
 - [ ] 线程池
-- [ ] Kafka
+- [x] Kafka
 - [ ] 动态规划
 
 
