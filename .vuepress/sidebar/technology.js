@@ -14,6 +14,7 @@ module.exports = [
             '/modules/technology/java/big_data_export',
             '/modules/technology/java/tomcat',
             '/modules/technology/java/java',
+            '/modules/technology/java/concorrent',
         ]
     },
     {
@@ -67,6 +68,16 @@ module.exports = [
         ]
     },
     {
+        title: '基础知识',
+        collapsable: true,
+        children: [
+            '/modules/technology/base/algorithm',
+            '/modules/technology/base/tcpip',
+            '/modules/technology/base/binary',
+            '/modules/technology/base/pattern',
+        ]
+    },
+    {
         title: '前端',
         collapsable: true,
         children: [
@@ -74,20 +85,4 @@ module.exports = [
             '/modules/technology/frontend/CSS_Module踩坑',
         ]
     },
-    {
-        title: '基础知识',
-        collapsable: true,
-        children: [
-            '/modules/technology/base/algorithm',
-            '/modules/technology/base/tcpip',
-            '/modules/technology/base/binary',
-        ]
-    },
-    // {
-    //     title: '其他',
-    //     collapsable: true,
-    //     children: [
-    //         '/modules/technology/vuepress_deploy'
-    //     ]
-    // },
 ]
