@@ -8,7 +8,20 @@
 
 ## Java并发机制的底层实现原理
 
+### volatile的应用
 
+#### 定义和实现原理
+
+volatile是如何来保 证 可 见 性的呢？ 让 我 们 在 X86处 理器下通 过 工具 获 取 JIT编译 器
+生成的 汇编 指令来 查 看 对 volatile进 行写操作 时 CPU会做什么事情。
+Java代 码 如下。
+```java
+instance = new Singleton();//  instance 是 volatile 变量
+```
+转变成汇编代码，如下。
+```assembly
+0x01a3de1d: movb $0×0,0×1104800(%esi);0x01a3de24: lock addl $0×0,(%esp);
+```
 
 
 
@@ -49,9 +62,89 @@
 
 **JMM属于语言级的内存模型**，它确保在不同的编译器和不同的处理器平台之上，通过禁止特定类型的编译器重排序和处理器重排序，为 程序员提供一致的内存可见性保证 。
 
+### volatile的内存语义
+
+volatile变量自身具有下列特性
+
+- 可见性，对一个volatile变量的读，总是能看到（任意线程）对这个volatile变量最后的写入。
+- ~~原子性~~ ，对任意单个volatile变量的读/写具有原子性，但类似于`volatile++`这种复合操作不具有原子性。
+
+#### volatile重排序规则
+
+- 当**第二个**操作是volatile写的时候，不管第一个操作是什么，都不能重排序。这个规则确保volatile写之前的操作不会被编译器重排序到volatile写之后。
+- 当**第一个**操作是volatile读时，不管第二个操作是什么，都不能重排序。这个规则确保volatile读之后的操作不会被编译器重排序到volatile读之前。
+- 第一个操作是volatile写，第二个操作时volatile读时，不能重排序。
+
+为了实现volatile的内存语义，编译器在生成字节码时，会在
+
+### 锁的内存语义
+
+以JUC包的`ReentrantLock`作为例子。
+
+
+
+### final的内存语义
+
+两个重排序规则
+
+- 在构造函数内对一个final域的写入，与随后把这个构造对象的引用赋值给一个引用变量，这两个操作之间不能重排序。
+- 初次读一个包含final域的对象的引用，与随后初次读这个final域，这两个操作之间不能重排序。
+
+读final域的重排序规则是，在一个线程中，初次读对象引用与初次读该对象包含的final域，JMM禁止处理器重排序这两个操作（注意，这个规则仅仅针对处理器）。编译器会在读final域操作的前面插入一个LoadLoad屏障。
+
+
+
 ### happens-before
 
 在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系。这里提到的两个操作既可以是在一个线程之内，也可以是在不同线程之间。
+
+《JSR-133:JavaMemoryModelandThreadSpecification》定义了如下happens-before规则。
+
+1. 程序顺序规则：一个线程中的每个操作，happens-before于该线程中的任意后续操作。
+2. 监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。
+3. volatile变量规则：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。
+4. 传递性：如果Ahappens-beforeB，且Bhappens-beforeC，那么Ahappens-beforeC。
+5. start()规则：如果线程A执行操作ThreadB.start()（启动线程B），那么A线程的ThreadB.start()操作happens-before于线程B中的任意操作。
+6. join()规则：如果线程A执行操作ThreadB.join()并成功返回，那么线程B中的任意操作happens-before于线程A从ThreadB.join()操作成功返回。
+
+### 双重检查锁定，double-checked locking
+
+```java
+public class Singleton {
+    // volatile 关键字保证，当uniqueInstance被实例时，多个线程能正确的获取uniqueInstance变量
+    private volatile static Singleton uniqueInstance;
+    private Singleton() {}
+    public static Singleton getInstance() {
+        // 检查实例，如果不存在就进入同步块
+        if (uniqueInstance == null) {
+            // 注意，只有第一次才彻底执行这里的代码
+            synchronized(Singleton.class) {
+                // 进入同步块后，再次检查，如果还是null才创建。
+                if (uniqueInstance == null) {
+                    uniqueInstance = new Singleton();
+                }
+            }
+        }
+        return uniqueInstance;
+    }
+}
+```
+
+### 延迟初始化
+
+```java
+class InstanceFactory {
+    private static class InstanceHolder {
+        public static Instance instance = new Instance();
+    }
+    public static Instance getInstance() {
+        // 这里将导致 InstanceHolder 类被加载并初始化
+        return InstanceHolder.instance;
+    }
+}
+```
+
+
 
 ## Java并发编程基础
 
