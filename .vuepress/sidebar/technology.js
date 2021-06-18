@@ -14,7 +14,7 @@ module.exports = [
             '/modules/technology/java/big_data_export',
             '/modules/technology/java/tomcat',
             '/modules/technology/java/java',
-            '/modules/technology/java/concorrent',
+            '/modules/technology/java/concurrent',
         ]
     },
     {
