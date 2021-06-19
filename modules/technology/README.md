@@ -1,6 +1,14 @@
 # 目录 
 <div>
 <Card 
+    name="java多线程"
+    image="https://cdn.clinan.xyz/jvm.jpg" 
+    url="/modules/technology/java/concurrent"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc="java 多线程"
+    /> 
+<Card 
     name="阿里亿级高并发系统设计"
     image="https://cdn.clinan.xyz/architecture.png" 
     url="/modules/technology/architecture/alibaba_book"

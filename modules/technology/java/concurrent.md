@@ -138,13 +138,13 @@ class ReentrantLock{
 ##### 对公平锁和给公平锁的内存语义的总结
 
 - 公平锁和非公平锁进行释放时，最后都要写一个volatile的变量state
-- 公平锁获取时，首先会去读volatile变量state
-- 非公平锁获取时，首先会用CAS更新volatile变量，这个操作同时具有volatile读和volatile写的内存语义
+- 公平锁获取时，首先会去读`volatile`变量state
+- 非公平锁获取时，首先会用CAS更新`volatile`变量，这个操作同时具有`volatile`读和`volatile`写的内存语义
 
 锁释放和锁获取至少有以下两种方式
 
-- 利用volatile变量的读-写锁具有的内存语义
-- 利用CAS所附带的volatile读和volatile写的内存语义
+- 利用`volatile`变量的读-写锁具有的内存语义
+- 利用CAS所附带的`volatile`读和`volatile`写的内存语义
 
 ### final的内存语义
 
@@ -155,8 +155,6 @@ class ReentrantLock{
 
 读final域的重排序规则是，在一个线程中，初次读对象引用与初次读该对象包含的final域，JMM禁止处理器重排序这两个操作（注意，这个规则仅仅针对处理器）。编译器会在读final域操作的前面插入一个LoadLoad屏障。
 
-
-
 ### happens-before
 
 在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系。这里提到的两个操作既可以是在一个线程之内，也可以是在不同线程之间。
@@ -166,7 +164,7 @@ class ReentrantLock{
 1. 程序顺序规则：一个线程中的每个操作，happens-before于该线程中的任意后续操作。
 2. 监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。
 3. volatile变量规则：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。
-4. 传递性：如果Ahappens-beforeB，且Bhappens-beforeC，那么Ahappens-beforeC。
+4. 传递性：如果A happens-before B，且B happens-before C，那么A happens-before C。
 5. start()规则：如果线程A执行操作ThreadB.start()（启动线程B），那么A线程的ThreadB.start()操作happens-before于线程B中的任意操作。
 6. join()规则：如果线程A执行操作ThreadB.join()并成功返回，那么线程B中的任意操作happens-before于线程A从ThreadB.join()操作成功返回。
 
@@ -232,8 +230,6 @@ Java线程状态
 - **能被中断地获取锁**：与`synchronized`不同，获取锁的线程能够响应中断，当获取到锁的线程被中断时，中断异常将会被抛出，同时锁会被释放。
 - **超时获取锁🔐**：在指定的时间之前获取锁，如果截止时间到了仍旧无法获得锁，则返回。
 
-
-
 ### 队列同步器AQS
 
 `AbstractQueuedSynchronizer`又被称为`AQS`。提供模板方法，其中`FailSync`和`nonFailSync`等都是基于AQS实现的。
@@ -269,8 +265,6 @@ public class CustomLock extends AbstractQueuedSynchronizer {
     }
 }
 ```
-
-
 
 ### ReentrantLock
 
@@ -313,9 +307,7 @@ public void increment() {
 
 `ReentrantLock`和`synchronized`关键字都是**排他锁（独占锁）**，这些锁在同一时刻只允许一个线程访问，而读写锁（`ReentrantReadWriteLock`）可以允许多个线程访问。**读锁是共享锁，写锁是排他锁。读锁和写锁互斥。**在性能上`ReentrantReadWriteLock`比`ReentrantLock`好。
 
-
-
-
+todo
 
 ### StampedLock
 
@@ -381,17 +373,133 @@ public void conditionSignal(){
 }
 ```
 
+todo
+
 ## Java并发容器和框架
 
 ### ConcurrentHashMap
 
+todo
 
+### Java中的阻塞队列
 
-### ConcurrentLinkendQueue
+阻塞队列是一个支持阻塞的插入和移除方法的队列：
 
+- 支持阻塞的插入方法：当队列满时，阻塞插入元素的线程，直到队列中有元素被移除
+- 支持阻塞的移除方法：当队列空时，获取队列元素的线程会一直等待，知道取得队列中的元素
 
+#### ArrayBlockingQueue数组结构组成的有界阻塞队列
 
+按照FIFO的原则对元素进行排序。可以选择是否保证队列的公平性，访问者的公平性是基于可重入锁`ReentrantLock`实现的
 
+```java
+ArrayBlockingQueue fairQueue = new ArrayBlockingQueue(100, true);
+```
+
+#### LinkedBlockingQueue链表实现的有界阻塞队列
+
+默认长度并且是最大长度为`Integer.MAX_VALUE`。**FIFO**
+
+#### PriorityBlockingQueue支持优先级的无界阻塞队列，数组实现
+
+默认情况下元素按照升序排序。也可以自定义类实现`compareTo()`方法来指定元素排序规则，或者在初始化`PriorityBlockingQueue`时，指定`Comparator`来对元素进行排序。
+
+#### DelayQueue支持延时获取元素的无界阻塞队列
+
+#### SynchronousQueue不存储元素的阻塞队列
+
+每一个put操作必须等待一个take操作，否则不能继续添加元素。可以把`SynchronousQueue`看成传球手，负责把生产者线程处理的数据直接给消费者线程。
+
+```java
+public SynchronousQueue(boolean fair) {
+    transferer = fair ? new TransferQueue<E>() : new TransferStack<E>();
+}
+```
+
+#### LinkedTransferQueue链表实现的无界阻塞队列
+
+相比于其他阻塞队列，LinkedTransferQueue多了tryTransfer和transfer方法。
+
+- transfer方法
+
+  如果当前有消费者正在等待接收元素（使用take()或poll()方法时），transfer方法可以吧生产者传入的元素立刻transfer给消费者。如果没有消费者在等待接收元素，transfer会将元素放在队列的tail节点，**并等待被消费者消费了才返回**。
+
+- tryTransfer方法
+
+  tryTransfer方法是用来试探生产者传入的元素是否能直接传给消费者。如果没有消费者等待接收元素，则返回false。和transfer方法的区别是tryTransfer方法无论消费者是否接收，方法立即返回，而transfer方法是必须等到消费者消费了才返回。
+
+#### LinkedBlockingDueue链表实现的双向阻塞队列
+
+LinkedBlockingDeque是一个由链表结构组成的双向阻塞队列。所谓双向队列指的是可以从队列的两端插入和移出元素。双向队列因为多了一个操作队列的入口，在多线程同时入队时，也就减少了一半的竞争。相比其他的阻塞队列，LinkedBlockingDeque多了addFirst、addLast、offerFirst、offerLast、peekFirst和peekLast等方法，以First单词结尾的方法，表示插入、获取（peek）或移除双端队列的第一个元素。以Last单词结尾的方法，表示插入、获取或移除双端队列的最后一个元素。另外，插入方法add等同于addLast，移除方法remove等效于removeFirst。但是take方法却等同于takeFirst，不知道是不是JDK的bug，使用时还是用带有First和Last后缀的方法更清楚。在初始化`LinkedBlockingDeque`时可以设置容量防止其过度膨胀。
+
+另外，双向阻塞队列可以运用在“工作窃取”模式中。
+
+#### ConcurrentLinkendQueue
+
+todo
+
+### Fork/Join框架
+
+Fork/Join框架是Java7提供的一个用于并行执行任务的框架，是一个把大任务分割成若干个小任务，最终汇总每个小任务结果后得到大任务结果的框架。
+
+```mermaid
+graph TD
+大任务 ---|Fork| 子任务1
+大任务 ---|Fork| 子任务2
+大任务 ---|Fork| 子任务3
+子任务1 ---|Fork| 子任务1.1
+子任务1 ---|Fork| 子任务1.2
+子任务1.1 ---|Join| 任务1结果
+子任务1.2 ---|Join| 任务1结果
+子任务2 --- 任务2结果
+子任务3 ---|Fork| 子任务3.1
+子任务3 ---|Fork| 子任务3.2
+子任务3.1 ---|Join| 任务3结果
+子任务3.2 ---|Join| 任务3结果
+任务1结果 ---|Join| 大任务结果
+任务2结果 ---|Join| 大任务结果
+任务3结果 ---|Join| 大任务结果
+```
+
+#### 工作窃取算法
+
+双向队列，被窃取的任务线程永远从双向队列的头部拿任务执行，而窃取任务的线程永远从双向队列的尾部拿任务执行。
+
+#### 使用
+
+```java
+@AllArgsConstructor
+public class CountTask extends RecursiveTask<Integer> {
+    private static final int threshold = 2;
+    private final int start;
+    private final int end;
+
+    @Override
+    protected Integer compute() {
+        int sum = 0;
+        if (end - start <= threshold) {
+            for (int i = start; i <= end; i++) {
+                sum += i;
+            }
+        } else {
+            int mid = (end + start) / 2;
+            CountTask t1 = new CountTask(start, mid);
+            CountTask t2 = new CountTask(mid + 1, end);
+            t1.fork();
+            t2.fork();
+            sum = t1.join() + t2.join();
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        ForkJoinPool forkJoinPool = new ForkJoinPool(10);
+        ForkJoinTask<Integer> submit = forkJoinPool.submit(new CountTask(1, 99));
+        Integer ret = submit.get();
+        System.out.println(ret);
+    }
+}
+```
 
 
 
@@ -399,14 +507,282 @@ public void conditionSignal(){
 
 ## 13个原子操作类
 
+### 基本类型
+
+#### AtomicBoolean
+
+#### AtomicInteger
+
+#### 
+
+#### AtomicLong
+
+### 数组
+
+#### AtomicIntegerArray
+
+#### AtomicReferenceArray
+
+#### AtomicLongArray
+
+### 引用类型
+
+#### AtomicMarkableReference
+#### AtomicReference
+
+#### AtomicStampedReference
+
+### 更新字段
+
+#### AtomicLongFieldUpdater
+
+#### AtomicIntegerFieldUpdater
+
+#### AtomicReferenceFieldUpdater
+
 
 
 ## 并发工具类
+
+### 等待多线程完成的`CountDownLatch`
+
+`CountDownLatch`的构造函数接收一个int参数作为计数器，表示等待N个点完成。当调用`countDown`方法时，计数器就会减一。 这里的N个点，可以是N个线程，也可以是1个线程里的N个执行步骤。例如解析`Excel`的sheet。
+
+#### 使用
+
+```java
+public class CountDownLatchTester {
+    static CountDownLatch countDownLatch = new CountDownLatch(3);
+    public static void main(String[] args) throws InterruptedException {
+        countDownLatch.countDown();
+        new Thread(() -> {
+            countDownLatch.countDown();
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                System.out.println("线程内打印");
+                countDownLatch.countDown();
+            }
+        }).start();
+        countDownLatch.await();
+    }
+}
+```
+
+### 同步屏障`CyclicBarrier`
+
+`CyclicBarrier`的字面意思是可循环使用（`Cyclic`）的屏障（`Barrier`）。主要作用是让一组线程到达一个屏障（也可以叫同步点）时被阻塞，直到最后一个线程（包括主线程）到达屏障时，屏障才会开门，所有被拦截的线程才会继续运行。
+
+和`CountDownLatch`相比，`CyclicBarrier`可以被重复使用，还提供一些了解阻塞线程信息的方法。
+
+#### 使用
+
+```java
+public class CyclicBarrierTester {
+    public static void main(String[] args) throws Exception {
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(2);
+        new Thread(() -> {
+            try {
+                System.out.println("sub thread");
+                Thread.sleep(3000);
+                cyclicBarrier.await();
+                System.out.println("sub thread were finished");
+            } catch (InterruptedException | BrokenBarrierException e) {
+                e.printStackTrace();
+            }
+        }).start();
+        // 重置方法
+        // cyclicBarrier.reset();
+        // 获取阻塞的线程数量的方法
+        // cyclicBarrier.getNumberWaiting();
+        cyclicBarrier.await();
+        System.out.println("sub thread were finished");
+    }
+}
+```
+
+### 控制并发线程数`Semaphore`
+
+`Semaphore`信号量。是用来控制同时访问特定资源的线程数量，它通过协调各个线程，以保证合理的使用公共资源。
+
+### 使用
+
+`Semaphore`可以用来做流量控制。加入有一个需求，要读取几万个文件的数据，因为都是IO密集型任务，我们可以启动几十个线程并发的去读取，但是如果读到内存后，还需要存储到数据库中，而数据库连接数只有10个，这时我们必须控制只有10个线程能够获取数据库链接来保存数据。
+
+```java
+public class SemaphoreTester {
+    private static final int THREAD_COUNT = 30;
+    static ExecutorService executorService = Executors.newFixedThreadPool(THREAD_COUNT);
+    // 最后只能有10个线程获取到数据库连接池
+    private static final Semaphore semaphore = new Semaphore(10);
+
+    public static void main(String[] args) {
+        for (int i = 0; i < THREAD_COUNT; i++) {
+            executorService.submit(() -> {
+                try {
+                    semaphore.acquire();
+                    System.out.println("模拟插入数据到数据库");
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    semaphore.release();
+                }
+            });
+        }
+        // 会等待所有线程执行完成才会关闭
+        executorService.shutdown();
+    }
+}
+```
+
+### 线程间交换数据的`Exchanger`
+
+`Exchanger`（交换者）是一个用于线程间协作，进行数据交换的工具类。它提供一个同步点，在这个同步点，两个线程可以交换彼此的数据。这两个线程通过`exchange`方法**交换数据**。
+
+```java
+public class ExchangerTester {
+    static ExecutorService executorService = Executors.newFixedThreadPool(2);
+    static Exchanger<String> exchanger = new Exchanger<>();
+
+    public static void main(String[] args) {
+        executorService.submit(() -> {
+            try {
+                String a = exchanger.exchange("wdnmd");
+                System.out.println("first thread: " + a);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.submit(() -> {
+            try {
+                String c = exchanger.exchange("C");
+                System.out.println("second thread: " + c);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        // 会等待所有线程执行完成才会关闭
+        executorService.shutdown();
+    }
+    // second thread: wdnmd
+    // first thread: C
+}
+```
 
 
 
 ## 线程池
 
+### 线程池的好处
+
+1. 降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗
+2. 提高响应速度。当任务到达时，任务可以不需要等到创建线程就能立即执行
+3. 提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一分配、调优和监控
+
+### 线程池的主要处理流程
+
+```mermaid
+graph LR
+A[提交任务]-->B{核心线程已满}--Yes-->C{队列是否已满}--Yes-->D{线程池是否已满}
+D--Yes-->END[按照饱和策略处理]
+B--No-->E[创建线程执行任务]
+C--No-->F[存入队列]
+D--No-->G[创建线程执行任务]
+```
 
 
-## Executor框架
+
+## `Executor`框架
+
+在`HotSpot VM`的线程模型中，Java线程（`java.lang.Thread`）被一对一映射为本地操作系统线程。
+
+### `Executor`框架的结构
+
+`Executor`框架主要由三大部分组成
+
+- 任务。包括被执行任务需要实现的接口：`Runnable`接口或`Callable`接口
+- 任务的执行。包括任务执行机制的核心接口`Executor`，以及继承自`Executor`的`ExecutorService`接口。`Executor`有两个关键类实现了`ExecutorService`接口（`ThreadPoolExecutor`和`ScheduledTreadPoolExecutor`）。
+- 异步计算的结果。包括接口`Future`和实现类`FutureTask`
+
+相关类和接口简介
+
+- `TheadPoolExecutor`是线程池的核心实现类，用来执行被提交的任务。
+
+- `ScheduledThreadPoolExecutor`，可以在给定的延迟后运行命令，或定期执行命令。比Timer更灵活，且功能强大。
+
+- `Callable`和`Runnable`的不同在于，`Callable`可以返回数据给主线程。而`Runnable`只能返回给定的结果。所有提交的`Runnable`接口的实现，最后在创建`FutureTask`的时候，都会被转为`Callable`
+
+  ```java
+  <T> Future<T> submit(Callable<T> task);// ExecutorService中对于submit callable任务的定义
+  <T> Future<T> submit(Runnable task, T result);
+  ```
+
+### `ScheduledThreadPoolExecutor`
+
+#### 相对于`ThreadPoolExecutor`的区别
+
+1. 使用`DelayQueue`作为任务队列
+2. 获取任务的方式不同
+3. 执行周期任务后，增加了额外操作
+
+#### 实现
+
+`ScheduledThreadPoolExecutor`会把待调度的`ScheduledFurtureTask`放到一个`DelayQueue`中。
+
+```java
+class ScheduledFutureTask<V> extends FutureTask<V> implements RunnableScheduledFuture<V> {
+    // 添加到队列中的序号
+    private final long sequenceNumber;
+    // 这个任务将要执行的具体时间
+    private long time;
+    // 表示任务执行的间隔
+    private final long period;
+}
+```
+
+`DelayQueue`继承了`PriorityQueue`，
+
+> 排序规则，order by time asc，order by sequenceNumber asc
+
+对`DelayQueue`的`take()`和`add()`都要加锁。
+
+**`task`**
+
+1. 获取`Lock`
+2. 获取周期任务
+   - 如果队列为空，当前线程到`Condition`中`await`。否则执行下一条判断
+   - 如果头元素的`time`比当前时间大，到`Condition`中`await`。否则执行下一条
+   - 获取所有`time`小于等于当前时间的`FurtureTask`，唤醒`Condition`中等待的线程，并交付`FutureTask`执行。
+3. 释放`Lock`
+
+**`add`**
+
+1. 获取`Lock`
+2. 添加任务，如果任务满足执行条件，则唤醒`Condition`中等待的线程，交付执行。
+3. 释放`Lock`
+
+### `FutureTask`
+
+`FutureTask`除了实现`Future`接口外，还实现了接口`Runnable`。因此`FutureTask`可以交给`Executor`执行，也可以由调用线程直接执行（强转后调用`FutureTask.run()`）。
+
+`FutureTask`有三种状态
+
+1. 未启动，`FutureTask.run()`未执行之前。
+2. 已启动，`FutureTask.run()`的执行过程中。
+3. 已完成，可以是正常结束，也可以是取消`Future.cancel(boolean mayInterruptIfRunning)`，也可以是因为抛出异常而结束。
+
+> 当`Future`处于未启动或已启动状态时，执行`Future.get()`方法将会导致调用线程阻塞；当`Future`处于已完成状态时，执行`Future.get()`方法将会导致调用线程立即返回结果或抛出异常。
+
+
+
+## 实战
+
+### 线上问题定位
+
+
+
+### 性能测试
+
