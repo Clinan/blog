@@ -310,7 +310,7 @@ end
 2. 并发标记
 3. 重新标记
 4. 并发清除
-5. *参数-XX:+UseCMS-CompactAtFullCollection，默认开启*整理碎片，无法并发
+5. 参数`-XX:+UseCMS-CompactAtFullCollection`，默认开启整理碎片，无法并发
 
 采用空闲列表来分配内存。如果内存不够大，则会发生一次`minorGC`
 
@@ -321,8 +321,6 @@ end
 - 由于是基于“标记-清除”算法实现的收集器，垃圾收集之后会有大量空间碎片。
 
   CMS提供了一个-XX:+UseCMS-CompactAtFullCollection开关参数（默认开启，JDK9废弃），用于在CMS收集器不得不进行FullGC时开启内存碎片的合并整理过程，由于内存这里必须移动存活对象，无法并发。增加了停顿时间。
-
-
 
 ### G1
 
@@ -428,6 +426,47 @@ flowchart LR
 **比较两个类是否“相等”，只有这两个类是由同一个类加载器加载的前提下才有意义，否则这两个类来源于同一个Class文件，被同一个虚拟机加载，只要加载它们的类加载器不同，那这两个类就必不相等。**
 
 “相等” ☞包括代表类对象的`equals`,`isAssignableFrom`,`isInstance`方法的返回结果。也包括`instanceof`的条件判定
+
+类加载器是线程安全的
+
+```java
+protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+    synchronized (getClassLoadingLock(name)) { // 线程安全
+        // First, check if the class has already been loaded
+        Class<?> c = findLoadedClass(name);
+        if (c == null) {
+            long t0 = System.nanoTime();
+            try {
+                if (parent != null) {
+                    c = parent.loadClass(name, false);
+                } else {
+                    c = findBootstrapClassOrNull(name);
+                }
+            } catch (ClassNotFoundException e) {
+                // ClassNotFoundException thrown if class not found
+                // from the non-null parent class loader
+            }
+            if (c == null) {
+                // If still not found, then invoke findClass in order
+                // to find the class.
+                long t1 = System.nanoTime();
+                c = findClass(name);
+
+                // this is the defining class loader; record the stats
+                sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);
+                sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);
+                sun.misc.PerfCounter.getFindClasses().increment();
+            }
+        }
+        if (resolve) {
+            resolveClass(c);
+        }
+        return c;
+    }
+}
+```
+
+
 
 #### 双亲委派模型
 
@@ -609,7 +648,7 @@ end
 
 #### 方法内联
 
-在前面的讲解中，我们多次提到方法内联，说它是编译器最重要的优化手段，甚至都可以不加 上“之一”。内联被业内戏称为优化之母，因为除了消除方法调用的成本之外，它更重要的意义是为其他优化手段建立良好的基础，没有内联，多数其他优化都无法有效进行。例子里testInline()方法的内部全部是无用的代码，但如果不做内联，后续即使进行了无用代码消除的优化，也无法发现任何“Dead Code”的存在。如果分开来看，foo()和testInline()两个方法里面的操作都有可能是有意义的。
+在前面的讲解中，我们多次提到方法内联，说它是编译器最重要的优化手段，甚至都可以不加 上“之一”。内联被业内戏称为优化之母，因为除了消除方法调用的成本之外，它更重要的意义是为其他优化手段建立良好的基础，没有内联，多数其他优化都无法有效进行。例子里`testInline()`方法的内部全部是无用的代码，但如果不做内联，后续即使进行了无用代码消除的优化，也无法发现任何“Dead Code”的存在。如果分开来看，`foo()`和`testInline()`两个方法里面的操作都有可能是有意义的。
 
 ```java
 public static void foo(Object obj) {

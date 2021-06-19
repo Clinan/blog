@@ -44,6 +44,7 @@ module.exports = [
             '/modules/technology/spring/springboot-autoconfigure',
             '/modules/technology/spring/controller参数解析拦截',
             '/modules/technology/spring/springboot',
+            '/modules/technology/spring/spring-bean',
             '/modules/technology/spring/springboot_init_flow',
             '/modules/technology/spring/spring-data-access',
             '/modules/technology/spring/mybatis',

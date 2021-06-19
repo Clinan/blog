@@ -1,6 +1,14 @@
 # 目录 
 <div>
 <Card 
+    name="Spring-bean"
+    image="https://cdn.clinan.xyz/spring.png" 
+    url="/modules/technology/spring/spring-bean"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc="spring-bean"
+    /> 
+<Card 
     name="java多线程"
     image="https://cdn.clinan.xyz/jvm.jpg" 
     url="/modules/technology/java/concurrent"

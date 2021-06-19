@@ -4,7 +4,7 @@ ODS, DWD DWS, ADS,
 
 - [ ] Dubbo
 - [ ] 为什么选择nacos 不选择ZK，CAP理论
-- [ ] java类加载，线程安全吗
+- [x] java类加载，线程安全吗
 - [ ] JVM GC回收器
 - [ ] tomcat的Filter
 - [ ] springmvc的intercepter

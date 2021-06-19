@@ -8,7 +8,7 @@
 
 ## Java并发机制的底层实现原理
 
-### volatile的应用
+### `volatile`的应用
 
 #### 定义和实现原理
 
@@ -89,7 +89,7 @@ instance = new Singleton();//  instance 是 volatile 变量
 - 可见性，对一个`volatile`变量的读，总是能看到（任意线程）对这个`volatile`变量最后的写入。
 - ~~原子性~~ ，对任意单个`volatile`变量的读/写具有原子性，但类似于`volatile++`这种复合操作不具有原子性。
 
-#### volatile重排序规则
+#### `volatile`重排序规则
 
 - 当**第二个**操作是`volatile`写的时候，不管第一个操作是什么，都不能重排序。这个规则确保`volatile`写之前的操作不会被编译器重排序到`volatile`写之后。
 - 当**第一个**操作是`volatile`读时，不管第二个操作是什么，都不能重排序。这个规则确保`volatile`读之后的操作不会被编译器重排序到`volatile`读之前。
@@ -147,7 +147,7 @@ class ReentrantLock{
 - 利用`volatile`变量的读-写锁具有的内存语义
 - 利用`CAS`所附带的`volatile`读和`volatile`写的内存语义
 
-### final的内存语义
+### `final`的内存语义
 
 两个重排序规则
 
@@ -419,7 +419,7 @@ public SynchronousQueue(boolean fair) {
 }
 ```
 
-#### LinkedTransferQueue链表实现的无界阻塞队列
+#### `LinkedTransferQueue`链表实现的无界阻塞队列
 
 相比于其他阻塞队列，`LinkedTransferQueue`多了`tryTransfer`和`transfer`方法。
 
