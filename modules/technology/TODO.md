@@ -8,7 +8,7 @@ ODS, DWD DWS, ADS,
 - [ ] JVM GC回收器
 - [ ] tomcat的Filter
 - [ ] springmvc的intercepter
-- [ ] bean的生命周期
+- [x] bean的生命周期
 - [x] AQS
 - [x] 学习多线程的编写
 - [x] 线程池
