@@ -198,7 +198,7 @@ HotSpot对象头（MarkWord)分为三部分
 - OopMap，在加载动作完成的时候，虚拟机就会把对象内什么偏移量上什么类型的数据计算出来，在JIT过程中，也会在特定的位置记录下栈里和寄存器里哪些位置是引用；这个特定的位置被称为安全点（safePoint）。记录这个数据的数据结构在hotspot中被称为OopMap
 - JNI(java native interface)方法使用句柄调用java对象，java对象调用JNI也要将自身包装为句柄调用
 
-### 安全点（SafePint）
+### 安全点（SafePoint）
 
 安全点一般设置在
 
