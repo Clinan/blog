@@ -1,4 +1,4 @@
-module.exports = {
+﻿module.exports = {
     title: '克林',
     description: '生活、技术、摄影',
     port: 80,
@@ -47,6 +47,7 @@ module.exports = {
 
     },
     plugins: [
+        ['vuepress-plugin-baidu-autopush']
         ['vuepress-plugin-mermaidjs'],
         ['@vuepress/nprogress'],
         ['@vuepress/search', {
