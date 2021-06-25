@@ -677,6 +677,16 @@ public class ExchangerTester {
 
 ## 线程池
 
+### 参数
+
+- `corePoolSize` – the number of threads to keep in the pool, even if they are idle, unless allowCoreThreadTimeOut is set
+- `maximumPoolSize` – the maximum number of threads to allow in the pool
+- `keepAliveTime` – 当线程数大于核心数时，多余的空闲线程在终止前等待新任务的最长时间。
+- `unit` – the time unit for the keepAliveTime argument
+- `workQueue` – the queue to use for holding tasks before they are executed. This queue will hold only the Runnable tasks submitted by the execute method.
+- `threadFactory` – the factory to use when the executor creates a new thread，默认`DefaultThreadFactory`
+- `handler` – the handler to use when execution is blocked because the thread bounds and queue capacities are reached， 默认是`AbortPolicy`
+
 ### 线程池的好处
 
 1. 降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗
@@ -695,6 +705,94 @@ D--No-->G[创建线程执行任务]
 ```
 
 
+
+### 线程池10问10答
+
+1. #### corePoolSize=0会怎么样
+
+   ```java
+   // execute(Runable command) 方法
+   int c = ctl.get();
+   if (workerCountOf(c) < corePoolSize) {
+       if (addWorker(command, true))
+           return;
+       c = ctl.get();
+   }
+   // workQueue.offer(command) 添加到队列，如果添加成功，返回false
+   if (isRunning(c) && workQueue.offer(command)) {
+       int recheck = ctl.get();
+       // 第一个submit的runable，!isRunning会返回false
+       if (! isRunning(recheck) && remove(command))
+           reject(command);
+       else if (workerCountOf(recheck) == 0)
+           // 如果工作线程数量为0， 则直接添加一个非核心工作线程
+           addWorker(null, false);
+   }
+   else if (!addWorker(command, false))
+       reject(command);
+   ```
+
+   - 因此可以知道下面这段代码其实也是会执行，并打印信息的。
+
+     ```java
+     LinkedBlockingQueue<Runnable> objects = new LinkedBlockingQueue<>(3);
+     final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(0, 2, 10, TimeUnit.SECONDS, objects);
+     for (int i = 0; i < 5; i++) {
+         int finalI = i;
+         threadPoolExecutor.submit(new Runnable() {
+             @SneakyThrows
+             @Override
+             public void run() {
+                 System.out.println(finalI);
+                 Thread.sleep(3000);
+             }
+         });
+     }
+     threadPoolExecutor.shutdown();
+     ```
+
+   - `corePoolSize`和`maximumPoolSize`都设为0， 会抛出非法参数异常
+
+   
+
+2. #### 线程池创建的之后，会立即创建线程池吗
+
+   **不会**。从上面的源码可以看出，创建完`ThreadPoolExecutor`之后，线程不会立即启动，而是要等到有任务提交的时候才会启动，除非调用了`prestartCoreThread`或者是`prestartAllCoreThreads`才会事先启动线程。
+
+   - `prestartCoreThread`：只预启动一个核心线程，如果核心线程设为0，则不会预先启动任何线程
+   - `prestartAllCoreThreads`：启动所有的核心线程，如果核心线程设为0，则不会预先启动任何线程
+
+3. #### 核心线程永远不会销毁吗？
+
+   在JDK1.6之后，如果allowsCoreThreadTimeOut=true，核心线程也可以被终止。
+
+4. #### 如何保证线程不被销毁
+
+   实现方式非常巧妙，核心线程（Worker）即使一直空闲也不终止，是通过workQueue.take()实现的，它会一直阻塞到从等待队列中取到新的任务。非核心线程空闲指定时间后终止是通过workQueue.poll(keepAliveTime, TimeUnit.NANOSECONDS)实现的，一个空闲的Worker只等待keepAliveTime，如果还没有取到任务则循环终止，线程也就运行结束了。
+
+5. #### 空闲线程过多会有什么问题
+
+   - 线程池保持空闲的核心线程是它的默认配置，一般来讲是没有问题的，因为它占用的内存一般不大。怕的就是业务代码中使用ThreadLocal缓存的数据过大又不清理。
+
+   
+
+   - 如果你的应用线程数处于高位，那么需要观察一下YoungGC的情况，估算一下Eden大小是否足够。如果不够的话，可能要谨慎地创建新线程，并且让空闲的线程终止；必要的时候，可能需要对JVM进行调参。
+
+6. ####  keepAliveTime=0会怎么样
+
+   在JDK1.8中，keepAliveTime=0表示非核心线程执行完立刻终止。
+
+   默认情况下，keepAliveTime小于0，初始化的时候才会报错；但如果`allowsCoreThreadTimeOut`，`keepAliveTime`必须大于0，不然初始化报错。
+
+7. #### 怎么进行异常处理
+
+   - 不论是用execute还是submit，都可以自己在业务代码上加try-catch进行异常处理。我一般喜欢使用这种方式，因为我喜欢对不同业务场景的异常进行差异化处理，至少打不一样的日志吧。
+
+   - 如果是execute，还可以自定义线程池，继承ThreadPoolExecutor并复写其afterExecute(Runnable r, Throwable t)方法。
+
+   - 或者实现`Thread.UncaughtExceptionHandler`接口，实现`void uncaughtException(Thread t, Throwable e);`方法，并将该handler传递给线程池的`ThreadFactory`。
+
+   - 但是注意，afterExecute和UncaughtExceptionHandler都不适用submit。因为通过上面的FutureTask.run()不难发现，它自己对Throwable进行了try-catch，封装到了outcome属性，所以底层方法execute的Worker是拿不到异常信息的。
 
 ## `Executor`框架
 
