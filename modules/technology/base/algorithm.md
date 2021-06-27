@@ -144,14 +144,11 @@ $$
 **设计动态规划算法的步骤**
 
 1. 刻画一个最优解的结构特征
-
 2. 递归地定义**最优解**的值
-
 3. 计算最优解的值，通常采用**自底向上**的方法
-
 4. 利用计算出的信息构造一个最优解
 
-   
+
 
 #### 算法应用原理
 
@@ -183,6 +180,26 @@ public int cut(int n) {
     return dp[n];
 }
 ```
+
+#### 矩阵链乘法顺序
+
+
+
+### MIT 计算过程
+
+1. define subproblems
+2. Guess (part of solution)
+3. relate subproblem solutions
+4. recurse & memoize, or build Dp table bottom-up
+5. solve original problem
+
+例如`LaTex` 英文排版换行，一个单词不能被隔断。
+
+1. subproblems: `words[i]`
+2. guess: `words[k,n-k]`, 第二行
+3. relate: words[i]+badness[i,j]
+
+
 
 
 
@@ -222,4 +239,59 @@ $$
 
 
 ### 最短路径（Dijkstra算法）
+
+
+
+
+
+# 做题经验
+
+## 双指针
+
+如果最后要输出不重复的数组，则需要对原数组进行`Arrays.sort(nums)`。
+
+### 四数之和
+
+- 集合版本
+
+    ```java
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums.length < 4) {
+            return res;
+        }
+        Arrays.sort(nums);
+        HashSet<String> set = new HashSet<>();
+        for (int ii = 0; ii < nums.length; ii++) {
+            for (int iii = ii + 1; iii < nums.length; iii++) {
+                int i = iii + 1, j = nums.length - 1;
+                while (i < j) {
+                    int sum = nums[ii] + nums[iii] + nums[i] + nums[j];
+                    if (sum == target) {
+                        String s = String.format("%s,%s,%s,%s", nums[ii], nums[iii], nums[i], nums[j]);
+                        if (set.add(s)) {
+                            List<Integer> a = new ArrayList<>();
+                            a.add(nums[ii]);
+                            a.add(nums[iii]);
+                            a.add(nums[i]);
+                            a.add(nums[j]);
+                            res.add(a);
+                        }
+                        // 这个很重要
+                        i++;
+                        j--;
+                        continue;
+                    }
+                    // 一定要重起一个if, 最好这样处理，不要else if
+                    if (sum < target) {
+                        i++;
+                    } else {
+                        j--;
+                    }
+                }
+            }
+        }
+        return res;
+    }
+    ```
 
