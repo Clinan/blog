@@ -31,6 +31,9 @@ module.exports = [
         collapsable: true, // 可折叠 
         children: [
             '/modules/technology/db/hadoop',
+            '/modules/technology/db/mysql_index',
+            '/modules/technology/db/mysql_transaction',
+            '/modules/technology/db/innodb',
             '/modules/technology/db/mysql_isolation',
             '/modules/technology/db/mysql_learn',
         ]

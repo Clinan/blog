@@ -187,7 +187,7 @@ public int cut(int n) {
 
 ### MIT 计算过程
 
-1. define subproblems
+1. define subproblems。判断子问题是前缀，还是后缀。或者是子串。
 2. Guess (part of solution),  尝试所有可能的选择，并选取最好的。choices for guess。 the least subproblem what is?
 3. relate subproblem solutions。recurrent(重复的做，递归)
 4. recurse & memoize, or build Dp table bottom-up
