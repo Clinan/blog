@@ -185,7 +185,7 @@ graph LR
 
 ### 物理存储
 
-- `log.dir`用于存分区的储目录清单。不是日志配置，日志在`log4j.properties`
+- `log.dir`用于存储分区目录清单。不是日志配置，日志在`log4j.properties`
 
 #### 分区分配
 
@@ -285,7 +285,7 @@ leader是同步副本，对于follower来说，它需要满足以下条件才被
 
 在主题级别和broker级别上，这个参数都叫
 
-`min.insync.replicas`
+`min.insync.replicas, ISR`
 
 用于确保已提交的数据被写入不止一个follower，就需要把最少同步follower数量设置为大一点的值。对于一个包含3个副本的主题，如果`min.insync.replicas`被设置为2，那么至少要存在2个同步的follower才能向分区写入数据。
 
