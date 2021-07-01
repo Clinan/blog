@@ -62,7 +62,7 @@ Java虚拟机具有一个所有线程之间共享的堆，堆是运行时数据�
 
 直接内存并不是虚拟机运行时数据区的一部分，也不是Java虚拟机定义的内存区域。
 
-JDK1.4加入了NIO（new Input/Output）类，因为了通道（channel）于缓冲区（Buffer）的I/O方式，它可以使用Native函数库直接分配堆外内存，然后通过存储在Java里面的`DirectByteBuffer`对象作为这块内存的引用进行操作。
+JDK1.4加入了NIO（new Input/Output）类，引入了通道（channel）于缓冲区（Buffer）的I/O方式，它可以使用Native方法直接分配堆外内存，然后通过存储在Java里面的`DirectByteBuffer`对象作为这块内存的引用进行操作。
 
 ## 对象
 

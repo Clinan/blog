@@ -15,4 +15,7 @@ ODS, DWD DWS, ADS,
 - [x] Kafka
 - [ ] 动态规划
 - [ ] REDIS
+- [ ] 缓存穿透/雪崩
+- [ ] 分布式事务
+- [ ] Java技术路线
 
