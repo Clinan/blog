@@ -186,6 +186,7 @@ graph LR
 ### 物理存储
 
 - `log.dir`用于存储分区目录清单。不是日志配置，日志在`log4j.properties`
+- kafka是异步刷盘的。
 
 #### 分区分配
 

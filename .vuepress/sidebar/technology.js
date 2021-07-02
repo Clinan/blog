@@ -24,6 +24,7 @@ module.exports = [
             '/modules/technology/middleware/redis',
             '/modules/technology/middleware/elasticsearch',
             '/modules/technology/middleware/kafka',
+            '/modules/technology/middleware/分布式事务',
         ]
     },
     {
