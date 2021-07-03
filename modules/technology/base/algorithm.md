@@ -183,6 +183,70 @@ public int cut(int n) {
 
 #### 矩阵链乘法顺序
 
+```java
+public static void main(String[] args) {
+        matrix(new int[]{10, 100, 50, 30, 40, 5000});
+}
+    
+public static void matrix(int[] p) {
+    int n = p.length;
+    int[][] m = new int[n][n];
+    for (int w = 1; w < n; w++) {
+        for (int i = 0; i < n - w + 1; i++) {
+            int j = i + w - 1;
+            m[i][j] = Integer.MAX_VALUE;
+            for (int k = i; k < j; k++) {
+                System.out.printf("%s,%s%n", i, j);
+                int c = m[i][k] + m[k + 1][j] + 1;
+                if (c < m[i][j]) {
+                    m[i][j] = c;
+                }
+            }
+            System.out.println("====");
+        }
+    }
+}
+
+//        1,2
+//        ====
+//        2,3
+//        ====
+//        3,4
+//        ====
+//        4,5
+//        ====
+//        1,3
+//        1,3
+//        ====
+//        2,4
+//        2,4
+//        ====
+//        3,5
+//        3,5
+//        ====
+//        1,4
+//        1,4
+//        1,4
+//        ====
+//        2,5
+//        2,5
+//        2,5
+//        ====
+//        1,5
+//        1,5
+//        1,5
+//        1,5
+//        ====
+```
+
+**逻辑图**
+
+![](https://cdn.clinan.xyz/dp.svg)
+
+
+
+#### 回文字串问题
+
 
 
 ### MIT 计算过程
