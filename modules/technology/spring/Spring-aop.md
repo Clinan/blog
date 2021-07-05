@@ -350,3 +350,4 @@ protected TargetSource getCustomTargetSource(Class<?> beanClass, String beanName
 
 https://www.jianshu.com/p/3bc6c6713b08?from=timeline
 
+通过bean的三级缓存来实现的。
