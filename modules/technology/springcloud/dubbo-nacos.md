@@ -119,6 +119,8 @@ public interface Transporter {
 
 **每个服务接口都会被转为一个`ServiceBean`的实例。`ServiceBean`继承于`ServiceConfig`**，主要的注册逻辑都在`ServiceConfig`中。
 
+
+
 ## 服务消费机制
 
 ![](https://cdn.clinan.xyz/server_consumer.png)
