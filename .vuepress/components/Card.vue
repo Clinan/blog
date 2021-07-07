@@ -24,14 +24,14 @@ export default {
     },
     url: {
       required: false,
-      default: "/modules/technology/rasperry_init"
+      default: ""
     },
     category: {
       required: false,
       default: "分类"
     },
-    image: { required: false, default: "/others.jpeg" },
-    author: { required: false, default: "Katherine Kato" },
+    image: { required: false, default: "" },
+    author: { required: false, default: "clinan" },
     desc: {
       required: false,
       default: `文章描述`
