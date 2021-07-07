@@ -52,7 +52,83 @@
   registry.register(URL.valueOf("override://0.0.0.0/com.foo.BarService?category=configurators&dynamic=false&application=foo&mock=force:return+null"));
   ```
 
-  
+
+
+
+## 拓展点SPI
+
+相对于java SPI的优势在于，不必实例化不需要用到的类。
+
+### `@SPI`
+
+用于表示拓展点。一般备注在接口上。属性`name`表示默认的实现。如
+
+```java
+@SPI("netty")// 表示默认使用netty=org.apache.dubbo.remoting.transport.netty4.NettyTransporter
+public interface Transporter {
+
+    /**
+     * Bind a server.
+     *
+     * @param url     server url
+     * @param handler
+     * @return server
+     * @throws RemotingException
+     * @see org.apache.dubbo.remoting.Transporters#bind(URL, ChannelHandler...)
+     */
+    @Adaptive({Constants.SERVER_KEY, Constants.TRANSPORTER_KEY})
+    RemotingServer bind(URL url, ChannelHandler handler) throws RemotingException;
+
+    /**
+     * Connect to a server.
+     *
+     * @param url     server url
+     * @param handler
+     * @return client
+     * @throws RemotingException
+     * @see org.apache.dubbo.remoting.Transporters#connect(URL, ChannelHandler...)
+     */
+    @Adaptive({Constants.CLIENT_KEY, Constants.TRANSPORTER_KEY})
+    Client connect(URL url, ChannelHandler handler) throws RemotingException;
+
+}
+```
+
+### `@Adaptive`
+
+拓展点自适应注解。如上面的代码。
+
+会根据多个参数，依次选择匹配的实现类。而不只是依靠`@SPI`中的默认实现。 会根据URL中的参数，查找`ExtensionLoader`。如果找到就使用对应的实现类。
+
+@Adaptive传入了两个Constants中的参数，它们的值分别是"server”和“transporter”。当外部调用Transporter#bind方法时，会动态从传入的参数“URL”中提取“server”的value，如果能匹配上**某个扩展实现类则直接使用对应的实现类**；如果未匹配上，则继续通过第二个参数“transporter”提取value。如果都没匹配上，则抛出异常。也就是说，如果`@Adaptive中`传入了多个参数，则依次**进行实现类的匹配**，直到最后抛出异常。这种动态寻找实现类的方式比较灵活，但只能激活一个具体的实现类，如果需要多个实现类同时被激活，如Filter可以同时有多个过滤器；或者根据不同的条件，同时激活多个实现类，如何实现？这就涉及最后一个特性一一自动激活。
+
+### `@Activate`
+
+激活多个拓展。
+
+
+
+## 服务暴露过程
+
+![](https://cdn.clinan.xyz/server-export.png)
+
+一个服务接口的暴露过程，主要分为两个步骤。
+
+1. 将持有的服务实例通过代理转为`Invoker`。
+2. 然后通过具体的协议（protocol，比如 dubbo）转为`Exporter`
+
+**每个服务接口都会被转为一个`ServiceBean`的实例。`ServiceBean`继承于`ServiceConfig`**，主要的注册逻辑都在`ServiceConfig`中。
+
+## 服务消费机制
+
+![](https://cdn.clinan.xyz/server_consumer.png)
+
+单个服务消费机制。主要分为两个部分。
+
+1. 把持有的服务实例根据协议（protocal）生成`Invoker`对象。
+2. 通过动态代理，转为用户接口的实现类。这个实现类处理了网络连接，服务调用，重试等功能。
+
+每个服务引用的接口都是`ReferenceBean`， `ReferenceBean#getObject()`方法是入口。继承于`ReferenceConfig`
 
 ### 线程模型
 
