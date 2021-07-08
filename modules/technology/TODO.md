@@ -22,3 +22,5 @@ ODS, DWD DWS, ADS,
 - [ ] stringbuffer
 - [ ] final
 - [ ] try finally的jvm实现
+- [ ] 线程池的stop和shutdown区别
+
