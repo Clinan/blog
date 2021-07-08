@@ -46,16 +46,16 @@
         ],
 
     },
-    plugins: [
-        ['vuepress-plugin-baidu-autopush']
-        ['mermaidjs'],
-        ['@vuepress/nprogress'],
-        ['@vuepress/search', {
+    plugins: {
+        'vuepress-plugin-baidu-autopush':{},
+        'mermaidjs':{},
+        '@vuepress/nprogress':{},
+        '@vuepress/search': {
             searchMaxSuggestions: 10
-        }],
-        ['@vuepress/back-to-top', true],
-        ['@vuepress/active-header-links', true],
-        ['@vssue/vuepress-plugin-vssue', {
+        },
+        '@vuepress/back-to-top': true,
+        '@vuepress/active-header-links': true,
+        '@vssue/vuepress-plugin-vssue': {
             // 设置 `platform` 而不是 `api`
             platform: 'github',
 
@@ -64,26 +64,26 @@
             repo: 'clinan.github.io',
             clientId: 'b0f0e07b684257f4d58b',
             clientSecret: 'f84b781141d1f67def044b7d97b7cc483c426391',
-        }],
-        ['container', {
+        },
+        'container': {
             type: 'tip',
             defaultTitle: {
                 '/': '提示'
             }
-        }],
-        ['container', {
+        },
+        'container': {
             type: 'warning',
             defaultTitle: {
                 '/': '注意'
             }
-        }],
-        ['container', {
+        },
+        'container': {
             type: 'danger',
             defaultTitle: {
                 '/': ''
             }
-        }],
+        },
 
-    ]
+    }
 
 };
