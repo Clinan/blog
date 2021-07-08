@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "description": "'# Hello VuePress!'",
   "scripts": {
-    "docs:dev": "vuepress dev .",
+    "docs:dev": "vuepress --debug dev .",
     "docs:build": "vuepress build .",
     "publish": "deploy.sh"
   },
   "keywords": [],
   "dependencies": {
+    "@vssue/api-github-v3": "^1.4.7",
+    "@vssue/vuepress-plugin-vssue": "^1.4.8",
     "valine": "^1.4.14",
-    "vue": "^2.6.14"
+    "vue": "^2.6.14",
+    "vue-server-renderer": "^2.6.14"
   },
   "devDependencies": {
     "@vuepress/plugin-active-header-links": "^1.8.2",
