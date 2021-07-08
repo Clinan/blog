@@ -13,5 +13,9 @@ ODS, DWD DWS, ADS,
 - [ ] REDIS
 - [ ] 缓存穿透/雪崩
 - [x] 分布式事务
-- [ ] spring事务transactionManager
+- [x] spring事务transactionManager
 - [ ] 分库分表
+- [ ] 列存储结构
+- [ ] 定时任务调度系统
+- [ ] 短URL系统
+

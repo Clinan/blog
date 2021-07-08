@@ -48,7 +48,7 @@
     },
     plugins: [
         ['vuepress-plugin-baidu-autopush']
-        ['vuepress-plugin-mermaidjs'],
+        ['mermaidjs'],
         ['@vuepress/nprogress'],
         ['@vuepress/search', {
             searchMaxSuggestions: 10
