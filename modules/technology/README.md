@@ -146,6 +146,4 @@
     desc="SpringDispatcherServlet分析"
     />
 </div>
-<ClientOnly>
-  <Vssue />
-</ClientOnly>
+<Vssue :title="$title" />
