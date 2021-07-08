@@ -146,4 +146,4 @@
     desc="SpringDispatcherServlet分析"
     />
 </div>
-<Vssue title="title" />
+<Vssue :title="$title" />

@@ -14,8 +14,11 @@ ODS, DWD DWS, ADS,
 - [ ] 缓存穿透/雪崩
 - [x] 分布式事务
 - [x] spring事务transactionManager
-- [ ] 分库分表
+- [x] 分库分表
 - [ ] 列存储结构
 - [ ] 定时任务调度系统
 - [ ] 短URL系统
-
+- [ ] 共识算法，多个主从之间如何HA
+- [ ] stringbuffer
+- [ ] final
+- [ ] try finally的jvm实现
