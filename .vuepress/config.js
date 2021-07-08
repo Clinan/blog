@@ -61,7 +61,7 @@
 
             // 其他的 Vssue 配置
             owner: 'Clinan',
-            repo: 'clinan.github.io',
+            repo: 'blog',
             clientId: 'b0f0e07b684257f4d58b',
             clientSecret: 'f84b781141d1f67def044b7d97b7cc483c426391',
         },
