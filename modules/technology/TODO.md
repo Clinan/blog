@@ -18,7 +18,12 @@ ODS, DWD DWS, ADS,
 - [ ] 列存储结构
 - [ ] 定时任务调度系统
 - [ ] ssh的原理
-- [ ] redis监控指标
+- [x] redis监控指标
 - [ ] 代码规范，codestyle
 - [ ] b+树的层高 
 - [ ] 共识算法，多个主从之间如何HA
+- [ ] 限流算法
+- [ ] kafka controller
+- [ ] 钱组合算法题
+- [ ] dubbo cluster
+
