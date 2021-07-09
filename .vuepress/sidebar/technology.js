@@ -6,6 +6,7 @@ module.exports = [
         children: [
             '/modules/technology/architecture/alibaba_book',
             '/modules/technology/architecture/shortner_url',
+            '/modules/technology/architecture/cache',
         ]
     },{
         title: 'Java', // 侧边栏名称 
