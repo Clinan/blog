@@ -4,7 +4,8 @@ module.exports = [
         title: '架构', // 侧边栏名称 
         collapsable: true, // 可折叠 
         children: [
-            '/modules/technology/architecture/alibaba_book'
+            '/modules/technology/architecture/alibaba_book',
+            '/modules/technology/architecture/shortner_url',
         ]
     },{
         title: 'Java', // 侧边栏名称 

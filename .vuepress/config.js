@@ -47,6 +47,9 @@
 
     },
     plugins: {
+        '@maginapp/vuepress-plugin-katex': {
+            delimiters: 'dollars'
+        },
         'vuepress-plugin-baidu-autopush':{},
         'mermaidjs':{},
         '@vuepress/nprogress':{},

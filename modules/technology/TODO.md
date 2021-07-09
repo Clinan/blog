@@ -17,5 +17,13 @@ ODS, DWD DWS, ADS,
 - [ ] 分库分表
 - [ ] 列存储结构
 - [ ] 定时任务调度系统
-- [ ] 短URL系统
+- [x] 短URL系统
+- [ ] ssh的原理
+- [ ] redis监控指标
+- [ ] 代码规范，codestyle
+- [x] final
+- [x] stringbuffer stringbuider
+- [x] try finally jvm语义
+- [x] 锁消除
+- [ ] b+树的层高 
 

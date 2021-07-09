@@ -25,15 +25,7 @@ CAS(compare and swap，比较并赋值)。
 
 每个就是2个字节,就是 16bit
 
-## 线程池
+## StringBuider和StringBuffer
 
-1. coreThread
-
-
-
-
-
-双检查锁
-
-
+StringBuilder和StringBuffer都继承于AbstractStringBuilder。不同的是，StringBuffer重写了大部分的方法，并在方法上添加了`synchronized`同步关键字。
 
