@@ -2,6 +2,14 @@
 
 <div> 
 <Card 
+    name="cache"
+    image="https://cdn.clinan.xyz/redis.png" 
+    url="/modules/technology/architecture/cache"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc="缓存场景"
+    /> 
+<Card 
     name="Spring-bean"
     image="https://cdn.clinan.xyz/spring.png" 
     url="/modules/technology/spring/spring-bean"

@@ -9,9 +9,9 @@ ODS, DWD DWS, ADS,
 - [ ] springmvc的intercepter
 - [x] bean的生命周期
 - [x] Kafka
-- [ ] 动态规划
+- [x] 动态规划
 - [ ] REDIS
-- [ ] 缓存穿透/雪崩
+- [x] 缓存穿透/雪崩
 - [x] 分布式事务
 - [x] spring事务transactionManager
 - [x] 分库分表
@@ -26,4 +26,6 @@ ODS, DWD DWS, ADS,
 - [ ] kafka controller
 - [ ] 钱组合算法题
 - [ ] dubbo cluster
+- [ ] 线程池的状态
+- [ ] 一致性Hash,对服务节点进行进行取余2的32方
 
