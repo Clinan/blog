@@ -10,7 +10,7 @@ ODS, DWD DWS, ADS,
 - [x] bean的生命周期
 - [x] Kafka
 - [x] 动态规划
-- [ ] REDIS
+- [x] REDIS
 - [x] 缓存穿透/雪崩
 - [x] 分布式事务
 - [x] spring事务transactionManager
@@ -20,12 +20,13 @@ ODS, DWD DWS, ADS,
 - [ ] ssh的原理
 - [x] redis监控指标
 - [ ] 代码规范，codestyle
-- [ ] b+树的层高 
-- [ ] 共识算法，多个主从之间如何HA
+- [x] b+树的层高 
+- [x] 共识算法，多个主从之间如何HA
 - [ ] 限流算法
 - [ ] kafka controller
 - [ ] 钱组合算法题
 - [ ] dubbo cluster
-- [ ] 线程池的状态
+- [x] 线程池的状态
 - [ ] 一致性Hash,对服务节点进行进行取余2的32方
+- [x] nacos
 

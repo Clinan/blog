@@ -704,7 +704,19 @@ C--No-->F[存入队列]
 D--No-->G[创建线程执行任务]
 ```
 
+### 线程的状态
 
+| state      | description                                                  |
+| ---------- | ------------------------------------------------------------ |
+| RUNNING    | 接收新任务，并处理排队任务                                   |
+| SHUTDOWN   | 不接收新任务，但处理排队任务                                 |
+| STOP       | 不接收新任务，不处理排队任务，并中断正在进行的任务           |
+| tidying    | 所有任务终止，workerCount=0，转换到tidying状态的任务将会执行terminate()的钩子方法 |
+| terminated | terminated()方法已完成                                       |
+
+- 调用`shutdown`方法，`RUNNING`状态转为`SHUTDOWN`。当**线程池和队列都为空**的时候，状态变为`TIDYING`
+- 调用`shutdownNow`方法，`RUNNING`状态转为`STOP`。当**线程池为空**时，状态变为`TIDYING`
+- 当调用`terminate()`钩子方法完成后，awaitTerminate方法中的线程状态都变为`terminate`后。状态从`TIDYING`变为`terminated`。
 
 ### 线程池10问10答
 
