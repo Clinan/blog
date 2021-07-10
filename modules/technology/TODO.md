@@ -22,7 +22,7 @@ ODS, DWD DWS, ADS,
 - [ ] 代码规范，codestyle
 - [x] b+树的层高 
 - [x] 共识算法，多个主从之间如何HA
-- [ ] 限流算法
+- [x] 限流算法
 - [ ] kafka controller
 - [ ] 钱组合算法题
 - [ ] dubbo cluster
