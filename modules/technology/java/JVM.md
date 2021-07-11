@@ -650,14 +650,17 @@ public class FieldHasNoPolymorphic {
 ## 后端编译与优化
 
 ```mermaid
-graph LR
+flowchart LR
 subgraph 解释器
 	interpreter
 end
+
 subgraph 编译器
-	interpreter-->|即时编译| clientComplier
-	interpreter-->|即时编译| serverComplier
+	 clientComplier
+	 serverComplier
 end 
+编译器-->|逆优化| 解释器
+解释器-->|即时编译| 编译器
 ```
 
 
@@ -721,7 +724,37 @@ try {
 
 虚拟机会注册一个Segment Fault信号的异常处理器（伪代码中的uncommon_trap()，务必注意这里是指进程层面的异常处理器，并非真的Java的try-catch语句的异常处理器），这样当foo不为空的时候，对value的访问是不会有任何额外对foo判空的开销的，而代价就是当foo真的为空时，必须转到异常处理器中恢复中断并抛出NullPointException异常。进入异常处理器的过程涉及进程从用户态转到内核态中处理的过程，结束后会再回到用户态，速度远比一次判空检查要慢得多。当foo极少为空的时候，隐式异常优化是值得的，但假如foo经常为空，这样的优化反而会让程序更慢。幸好HotSpot虚拟机足够聪明，它会根据运行期收集到的性能监控信息自动选择最合适的方案。
 
-## Java内存与模型
+## Java内存模型
+
+```mermaid
+flowchart LR
+subgraph 线程
+    处理器A
+    处理器B
+    处理器C
+end
+subgraph 工作内存
+	高速缓存1
+	高速缓存2
+	高速缓存3
+end 
+subgraph Save和Load操作
+	MESI等协议
+end 
+
+处理器A <--> 高速缓存1
+处理器B <--> 高速缓存2
+处理器C <--> 高速缓存3
+
+高速缓存1<--> MESI等协议
+高速缓存2<--> MESI等协议
+高速缓存3<--> MESI等协议
+ 
+MESI等协议<-->主内存[(主内存)]
+
+```
+
+
 
 ### volatile
 

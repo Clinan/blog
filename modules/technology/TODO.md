@@ -33,4 +33,5 @@ ODS, DWD DWS, ADS,
 - [ ] 负载均衡算法
 - [x] 线程池拒绝策略
 - [ ] dubbo限流策略 TPSLimitFilter 默认不启用，令牌桶限流
+- [ ] http chunk https的过程。url和URI的区别。CDN,DNS
 
