@@ -23,10 +23,14 @@ ODS, DWD DWS, ADS,
 - [x] b+树的层高 
 - [x] 共识算法，多个主从之间如何HA
 - [x] 限流算法
-- [ ] kafka controller
-- [ ] 钱组合算法题
+- [x] kafka controller
+- [ ] 钱组合算法题，背包9讲
 - [ ] dubbo cluster
 - [x] 线程池的状态
 - [ ] 一致性Hash,对服务节点进行进行取余2的32方
 - [x] nacos
+- [ ] jvm JMM，大量volatile总线风暴
+- [ ] 负载均衡算法
+- [x] 线程池拒绝策略
+- [ ] dubbo限流策略 TPSLimitFilter 默认不启用，令牌桶限流
 

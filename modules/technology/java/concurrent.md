@@ -704,7 +704,7 @@ C--No-->F[存入队列]
 D--No-->G[创建线程执行任务]
 ```
 
-### 线程的状态
+### 线程池的状态
 
 | state      | description                                                  |
 | ---------- | ------------------------------------------------------------ |
@@ -717,6 +717,13 @@ D--No-->G[创建线程执行任务]
 - 调用`shutdown`方法，`RUNNING`状态转为`SHUTDOWN`。当**线程池和队列都为空**的时候，状态变为`TIDYING`
 - 调用`shutdownNow`方法，`RUNNING`状态转为`STOP`。当**线程池为空**时，状态变为`TIDYING`
 - 当调用`terminate()`钩子方法完成后，awaitTerminate方法中的线程状态都变为`terminate`后。状态从`TIDYING`变为`terminated`。
+
+### 线程池拒绝策略
+
+- `AbortPolicy`：直接拒绝，并抛出一个运行时异常：`RejectedExecutionException`
+- `DiscardPolicy`：拒绝加入的任务，但是是静默的，不抛出任何异常
+- `DiscardOldestPolicy`：忽略（丢弃）下一个要执行的任务，如果刚好有可用的线程，则立即提交执行。
+- `CallerRunsPolicy`：被拒绝任务的处理程序，它直接在execute方法的**调用线程中运行**被拒绝的任务，除非执行程序已关闭，在这种情况下任务将被丢弃。
 
 ### 线程池10问10答
 
