@@ -7,6 +7,8 @@ module.exports = [
             '/modules/technology/architecture/alibaba_book',
             '/modules/technology/architecture/shortner_url',
             '/modules/technology/architecture/cache',
+            '/modules/technology/architecture/limit',
+            '/modules/technology/architecture/consensus',
         ]
     },{
         title: 'Java', // 侧边栏名称 

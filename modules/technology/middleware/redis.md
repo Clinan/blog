@@ -302,3 +302,66 @@ set lockkey 1 EX 100 NX
 
 才有多路复用IO处理socket请求。每个socket请求进来之后，都会进入到通过多路复用IO进行调度和处理，然后将其放到队列里，等待redis单线程write/read。由于都是内存操作，所以单线程效率也很高。
 
+
+
+## redis监控指标
+
+```
+#./redis-cli
+> info
+```
+
+
+
+### 性能监控
+
+| Name                      | Description             |
+| ------------------------- | ----------------------- |
+| latency                   | Redis响应一个请求的时间 |
+| instantaneous_ops_per_sec | 平均每秒处理请求总数    |
+
+### 内存监控
+
+| Name                    | Description                                   |
+| ----------------------- | --------------------------------------------- |
+| used_memory             | 已用内存                                      |
+| mem_fragmentation_ratio | 内存碎片率                                    |
+| evicted_keys            | 由于最大内存限制被移除的key的数量             |
+| blocked_clients         | 由于BLPOP,BRPOP,or BRPOPLPUSH而备阻塞的客户端 |
+
+### 基本活动指标
+
+| Name                       | Description                |
+| -------------------------- | -------------------------- |
+| connected_clients          | 客户端连接数               |
+| connect_slaves             | slave数量                  |
+| master_last_io_seconds_ago | 最近一次主从交互之后的秒数 |
+| keyspace                   | 数据库中的key值总数        |
+
+### 持久化指标
+
+| Name                       | Description                        |
+| -------------------------- | ---------------------------------- |
+| rdb_last_save_time         | 最后一次持久化保存磁盘的时间戳     |
+| rdb_changes_sice_last_save | 自最后一次持久化以来数据库的更改数 |
+
+### 错误指标
+
+| Name                           | Description                           |
+| ------------------------------ | ------------------------------------- |
+| rejected_connects              | 由于达到maxClient限制而被拒绝的连接数 |
+| keyspace_misses                | key值查找没命中的次数                 |
+| master_link_down_since_seconds | 主从断开的持续时间（以秒为单位)       |
+
+## 监控的命令
+```
+1. redis-benchmark 
+#./redis-benchmark -c 100 -n 5000 redis性能测试命令 100个连接，5000次请求对应的性能
+
+2. redis-stat
+3. redis-faina
+4. redislive
+5. redis-cli
+6. monitor
+7. showlog
+```

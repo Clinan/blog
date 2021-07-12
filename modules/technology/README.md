@@ -2,6 +2,22 @@
 
 <div> 
 <Card 
+    name="限流算法"
+    image="https://cdn.clinan.xyz/architecture.png" 
+    url="/modules/technology/architecture/limit"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc="限流算法的介绍和使用场景"
+    />
+<Card 
+    name="cache"
+    image="https://cdn.clinan.xyz/redis.png" 
+    url="/modules/technology/architecture/cache"
+    category="TECHNOLOGY"
+    author="Clinan"
+    desc="缓存场景"
+    /> 
+<Card 
     name="Spring-bean"
     image="https://cdn.clinan.xyz/spring.png" 
     url="/modules/technology/spring/spring-bean"
