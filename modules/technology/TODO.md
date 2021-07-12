@@ -35,8 +35,9 @@ ODS, DWD DWS, ADS,
 - [ ] dubbo限流策略 TPSLimitFilter 默认不启用，令牌桶限流
 - [ ] http chunk https的过程。url和URI的区别。CDN,DNS
 - [ ] weakrefence<> hashMap 内存泄露
-- [ ] 什么情况下回导致Linux的load average 值飙升？
+- [ ] 什么情况下会导致Linux的load average 值飙升？
 - [ ] dubbo和中间件的第三方隔离
-- [ ] 重入锁的无锁队列是如何实现。
-- [ ] servece mesh net
+- [ ] 重入锁的无锁队列是如何实现。head tail+CAS
+- [ ] service mesh了解吗
+- [ ] dubbo和中间件第三方依赖冲突，如何解决
 
